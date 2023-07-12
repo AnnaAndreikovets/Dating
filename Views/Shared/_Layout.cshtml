@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width" charset="UTF-8">
+    <title>@ViewBag.Title</title>
+    <link href = "~/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+      <header>
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Blobo</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Main</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">Messages</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">People</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">Sign in</a>
+            </li><!--выводит выйти или войти на одной кнокпе, всё зависит от того, что у нас в текущий момент-->
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">Sign out</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    
+    <div class="container mt-5">
+      @RenderBody()
+    </div>
+    
+    <hr>
+
+    <footer class="container">
+      <p class="float-right"><a href="#">Back to top</a></p>
+      <p>© 2023 All rights reserved</p>
+    </footer>
+    
+    <script src="~/js/bootstrap.min.js"></script>
+  </body>
+</html>

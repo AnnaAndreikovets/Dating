@@ -1,0 +1,73 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\css\\style.css",
+      "PackagePath": "staticwebassets\\css\\style.css"
+    },
+    {
+      "Id": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\img\\AlexandrMaksev.jpg",
+      "PackagePath": "staticwebassets\\img\\AlexandrMaksev.jpg"
+    },
+    {
+      "Id": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\img\\AndreyKulkov.jpg",
+      "PackagePath": "staticwebassets\\img\\AndreyKulkov.jpg"
+    },
+    {
+      "Id": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\img\\IrinaNugeva.jpg",
+      "PackagePath": "staticwebassets\\img\\IrinaNugeva.jpg"
+    },
+    {
+      "Id": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\img\\KarolinaSmitova.jpg",
+      "PackagePath": "staticwebassets\\img\\KarolinaSmitova.jpg"
+    },
+    {
+      "Id": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\img\\KristinaBrotova.jpg",
+      "PackagePath": "staticwebassets\\img\\KristinaBrotova.jpg"
+    },
+    {
+      "Id": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\img\\LadaKartish.jpg",
+      "PackagePath": "staticwebassets\\img\\LadaKartish.jpg"
+    },
+    {
+      "Id": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\img\\MariaDeben.jpg",
+      "PackagePath": "staticwebassets\\img\\MariaDeben.jpg"
+    },
+    {
+      "Id": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\img\\OlegSmishkev.jpg",
+      "PackagePath": "staticwebassets\\img\\OlegSmishkev.jpg"
+    },
+    {
+      "Id": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\img\\RonaldoEvrikan.jpg",
+      "PackagePath": "staticwebassets\\img\\RonaldoEvrikan.jpg"
+    },
+    {
+      "Id": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\img\\VolodyaMartiskin.jpg",
+      "PackagePath": "staticwebassets\\img\\VolodyaMartiskin.jpg"
+    },
+    {
+      "Id": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.DatingSite.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.DatingSite.props",
+      "PackagePath": "build\\DatingSite.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.DatingSite.props",
+      "PackagePath": "buildMultiTargeting\\DatingSite.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.DatingSite.props",
+      "PackagePath": "buildTransitive\\DatingSite.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
