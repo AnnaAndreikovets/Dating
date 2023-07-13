@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using DatingSite.Data.Interfaces;
-using DatingSite.Data;
+using DatingSite.Data.Models;
+using DatingSite.Data.Mocks;
 
 namespace DatingSite.Controllers
 {
@@ -16,8 +17,18 @@ namespace DatingSite.Controllers
         [Route("Profile/Index/{guid}")]
         public IActionResult Index(Guid guid)
         {
-            var person = blank.Person(guid);
+            //для отображения профиля через сообщение
+            //проверка, что он нам нравится иначе вернуть дефолтную страницу
+            Blank person = blank.Person(guid);
+
             return View(person);
         }
+        [Route("Profile/User")]
+        public IActionResult User()
+        {
+            //для отображения нашего профиля
+            return View(MockBlanks.User);
+        }
+
     }
 }

@@ -18,9 +18,8 @@ namespace DatingSite.Controllers
         public IActionResult Index(string sex)
         {
             //vm
-            Console.WriteLine(sex + "sex");
             Blank result = blank.PersonForLooking(sex);
-            Console.WriteLine(result.Id);
+            
             return View(result);
         }
 
