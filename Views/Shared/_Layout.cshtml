@@ -1,9 +1,5 @@
 <!DOCTYPE html>
 
-@{
-  object sex = ViewData["sex"];
-}
-
 <html lang="en">
   <head>
     <meta name="viewport" content="width=device-width" charset="UTF-8">
@@ -23,7 +19,7 @@
               <a class="nav-link" href="/">Main</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link disabled" href="#">Messages</a>
+              <a class="nav-link disabled" href="Mail/List">Messages</a>
             </li>
             <li class="nav-item">
               <a class="nav-link disabled" href="Profile/User">Profile</a>
@@ -31,12 +27,8 @@
             <li class="nav-item">
               <a class="nav-link disabled" href="Ankets/List/@MockBlanks.User.PreferSex">People</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#">Sign in</a>
-            </li><!--выводит выйти или войти на одной кнокпе, всё зависит от того, что у нас в текущий момент-->
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#">Sign out</a>
-            </li>
+            <li class="nav-item"> <a class="nav-link disabled" href="#">Sign in</a> </li> <li class="nav-item"> <a class="nav-link disabled" href="#">Sign out</a> </li>
+            <!--выводит выйти или войти на одной кнокпе, всё зависит от того, что у нас в текущий момент-->
           </ul>
         </div>
       </nav>

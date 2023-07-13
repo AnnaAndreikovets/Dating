@@ -32,6 +32,7 @@ namespace DatingSite.Controllers
             if(like)
             {
                 _blank.Like = true;
+                //тут добавить пользователю чат, а так же закинуть его в Мок
             }
 
             _blank.See = true;

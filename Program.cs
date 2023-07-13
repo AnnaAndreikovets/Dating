@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
 builder.Services.AddTransient<IBlank, BlankRepository>();
+builder.Services.AddTransient<IChat, ChatRepository>();
 
 var app = builder.Build();
 

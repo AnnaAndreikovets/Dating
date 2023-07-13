@@ -14,6 +14,8 @@ namespace DatingSite.Data.Models
         public string Email { get; set; } = null!;
         public string Password { get; set; } = null!;
 
+        public Guid? ChatId { get; set; }
+
         public bool See { get; set; } //типо уже видели этого человека
         public bool Like { get; set; } //контакт есть/ нет
     }

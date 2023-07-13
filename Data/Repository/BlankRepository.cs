@@ -11,11 +11,6 @@ namespace DatingSite.Data.Repository
             return MockBlanks.Blanks.FirstOrDefault(b => b.Sex == sex & b.See == false);
         }
 
-        public IEnumerable<Blank>? Favourite()
-        {
-            return MockBlanks.Blanks.Where(b => b.Like);
-        }
-
         public Blank? Person(Guid id)
         {
             return MockBlanks.Blanks.FirstOrDefault(b => b.Id.CompareTo(id) == 0);
