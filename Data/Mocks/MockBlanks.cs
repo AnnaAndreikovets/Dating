@@ -139,5 +139,18 @@ namespace DatingSite.Data.Mocks
             };
         
         static public List<Blank> Blanks { get { return blanks; } set { blanks.AddRange(value); } }
+
+        static public Blank User = new Blank(){
+            Id = Guid.NewGuid(),
+            FirstName = "Anna",
+            SecondName = "Andreikovets",
+            Years = 18,
+            Photo = "img/AnnaAndreikovets.jpg",
+            Description = "Hello! I am studying to become a programmer. I absolutely adore bringing my creative ideas to life through coding, but I also have other passions that I love to share. I am a true talent in the kitchen and artistry! When I step into the kitchen, my imagination transforms simple ingredients into culinary magic. I enjoy experimenting with different cuisines and creating unique flavors. If you also have a passion for cooking, let's discover new recipes together and share our culinary adventures. Apart from cooking, I find inspiration in the world of art. With a brush in my hand and paint on the canvas, I create my own world. Drawing allows me to express emotions and showcase my inner beauty. I would love to find someone who shares my passion for art and can help bring new creative ideas to life. I am looking for someone who shares my passion for programming, cooking, and drawing. I want to find someone with whom I can not only discuss new technologies and code together but also spend time cooking delicious dishes and inspiring each other in our creative pursuits. If you are ambitious, creative, and eager to explore new horizons, I am looking forward to your response. Let's create a unique blend of programming, cooking, and artistry and become a source of inspiration for each other. I'll be happy to assist you if you have any further questions or need support. Just let me know!",
+            Sex = "female",
+            PreferSex = "male",
+            Email = "ann.andreikovets@gmail.com",
+            Password = "qwerty1234M"
+        };
     }
 }
