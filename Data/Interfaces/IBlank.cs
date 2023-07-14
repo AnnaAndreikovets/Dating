@@ -4,7 +4,8 @@ namespace DatingSite.Data.Interfaces
 {
     public interface IBlank
     {
-        public Blank? PersonForLooking(string sex);
+        public Blank? PersonForLooking();
         public Blank? Person(Guid id);
+        public Blank User();
     }
 }

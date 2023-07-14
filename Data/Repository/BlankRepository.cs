@@ -6,14 +6,19 @@ namespace DatingSite.Data.Repository
 {
     public class BlankRepository : IBlank
     {
-        public Blank? PersonForLooking(string sex)
+        public Blank? PersonForLooking()
         {
-            return MockBlanks.Blanks.FirstOrDefault(b => b.Sex == sex & b.See == false);
+            return MockBlanks.Blanks.FirstOrDefault(b => b.Sex == User().PreferSex && b.See == false);
         }
 
         public Blank? Person(Guid id)
         {
             return MockBlanks.Blanks.FirstOrDefault(b => b.Id.CompareTo(id) == 0);
+        }
+        
+        public Blank User()
+        {
+            return MockBlanks.User;
         }
     }
 }

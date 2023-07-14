@@ -34,25 +34,6 @@ namespace DatingSite.Data.Mocks
                         Time = DateTime.Now
                     }
                 }
-            },
-            new Chat()
-            {
-                Id = Guid.NewGuid(),
-                Blank = MockBlanks.Blanks.Last(),
-            },
-            new Chat()
-            {
-                Id = Guid.NewGuid(),
-                Blank = MockBlanks.Blanks.Last(),
-                Messages = new List<Message>()
-                {
-                    new Message()
-                    {
-                        Id = 3,
-                        Text = "third",
-                        Time = new DateTime(2017, 7, 20)
-                    }
-                }
             }
         }; //чисито для теста заполнила
         

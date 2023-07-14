@@ -27,7 +27,7 @@ namespace DatingSite.Controllers
         public IActionResult User()
         {
             //для отображения нашего профиля
-            return View(MockBlanks.User);
+            return View(blank.User());
         }
 
     }

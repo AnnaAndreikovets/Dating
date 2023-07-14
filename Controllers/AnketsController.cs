@@ -14,11 +14,11 @@ namespace DatingSite.Controllers
             this.blank = blank;
         }
 
-        [Route("Ankets/List/{sex}")]
-        public IActionResult Index(string sex)
+        [Route("Ankets/List")]
+        public IActionResult Index()
         {
             //vm
-            Blank result = blank.PersonForLooking(sex);
+            Blank result = blank.PersonForLooking();
             
             return View(result);
         }
@@ -29,14 +29,21 @@ namespace DatingSite.Controllers
         {
             Blank? _blank = blank.Person(guid); //проверка, что айди верное
             
+            
             if(like)
             {
+                Chat chat = new Chat()
+                {
+                    Id = Guid.NewGuid(),
+                    Blank = _blank
+                };
+
                 _blank.Like = true;
-                //тут добавить пользователю чат, а так же закинуть его в Мок
+                _blank.ChatId = chat.Id;
             }
 
             _blank.See = true;
-            //проверить, что есть непросмотренные люди, а иначе вернуть сообщение, что людей не найдено
+            
             return RedirectToAction("Index", new {_blank.Sex});
         }
     }
