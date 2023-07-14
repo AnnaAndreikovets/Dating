@@ -1,4 +1,3 @@
-using DatingSite.Data.Mocks;
 using DatingSite.Data.Models;
 
 namespace DatingSite.Data.Interfaces

@@ -10,5 +10,7 @@ namespace DatingSite.Data.Models
         public int Id { get; set; }
         public string Text { get; set; } = null!; //добавить обработку, что там должно что-то присутствовать кроме пустых символов
         public DateTime Time { get; set; } //время отправки
+        public bool Sender { get; set; } //true - мы, false - пользователь, с которым разговариваем
+        public bool Reading { get; set; }
     }
 }

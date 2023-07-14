@@ -9,11 +9,53 @@ namespace DatingSite.Data.Mocks
             new Chat()
             {
                 Id = Guid.NewGuid(),
-                PersonId = Guid.NewGuid(), //число для теста
-                Name = "Some name"
+                Blank = MockBlanks.Blanks.First()
+            },
+            new Chat()
+            {
+                Id = Guid.NewGuid(),
+                Blank = MockBlanks.Blanks.Last(),
+                Messages = new List<Message>()
+                {
+                    new Message()
+                    {
+                        Id = 1,
+                        Text = "First message"
+                    },
+                    new Message()
+                    {
+                        Id = 2,
+                        Text = "flsd;jkfiosdjklfjklshj message"
+                    },
+                    new Message()
+                    {
+                        Id = 3,
+                        Text = "bgrdklgjklergt ijfdljkf jdkfhj jhjdhjhjhf hbfhjfj message",
+                        Time = DateTime.Now
+                    }
+                }
+            },
+            new Chat()
+            {
+                Id = Guid.NewGuid(),
+                Blank = MockBlanks.Blanks.Last(),
+            },
+            new Chat()
+            {
+                Id = Guid.NewGuid(),
+                Blank = MockBlanks.Blanks.Last(),
+                Messages = new List<Message>()
+                {
+                    new Message()
+                    {
+                        Id = 3,
+                        Text = "third",
+                        Time = new DateTime(2017, 7, 20)
+                    }
+                }
             }
-        };
-        //сюда добавить чат с каким-нибудь человечком
+        }; //чисито для теста заполнила
+        
         static public List<Chat> Chats { get { return chats; } set { chats.AddRange(value); } }
     }
 }

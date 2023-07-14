@@ -16,7 +16,7 @@ namespace DatingSite.Data.Models
 
         public Guid? ChatId { get; set; }
 
-        public bool See { get; set; } //типо уже видели этого человека
-        public bool Like { get; set; } //контакт есть/ нет
+        public bool See { get; set; }
+        public bool Like { get; set; }
     }
 }

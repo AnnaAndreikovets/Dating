@@ -17,8 +17,8 @@ namespace DatingSite.Controllers
         [Route("Mail/List")]
         public IActionResult List()
         {
-            IEnumerable<Chat> chats = chatRepository.Chats();
-            //если вдруг там пусто,то вернуть сообщение, а иначе списокs
+            IEnumerable<Chat> chats = chatRepository.Chats().OrderByDescending(c => c.Messages is not null ? c.Messages.Last().Time : DateTime.Now);
+            
             return View(chats);
         }
 
