@@ -29,11 +29,43 @@ namespace DatingSite.Controllers
         {
             //vm
             Blank _blank = blank.Person(id);
-            Console.WriteLine(_blank.ChatId);
+            
             Chat _chat = chat.Chat(_blank.ChatId);
-            Console.WriteLine(_chat + " -c");
 
             return View(_chat);
+        }
+    
+        [HttpPost]
+        [Route("/Mail/Message/{id}")]
+        public void Message(Guid id)
+        {
+            Chat currentChat = chat.Chat(id);
+            Blank user = blank.User();
+
+            Message _message = new Message()
+            {
+                Text = Request.Form["message"],
+                Time = DateTime.Now,
+                Sender = $"{user.FirstName} {user.SecondName}"
+            };
+            
+            if(currentChat.Messages is null)
+            {
+                _message.Id = 1;
+
+                currentChat.Messages = new List<Message>()
+                {
+                    _message
+                };
+            }
+            else
+            {
+                _message.Id = currentChat.Messages.Last().Id + 1;
+
+                currentChat.Messages.Add(_message);
+            }
+            //вернуть инфу про успешное сообщение
+            
         }
     }
 }
