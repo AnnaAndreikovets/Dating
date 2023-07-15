@@ -9,12 +9,7 @@ namespace DatingSite.Data.Mocks
             new Chat()
             {
                 Id = Guid.NewGuid(),
-                Blank = MockBlanks.Blanks.First()
-            },
-            new Chat()
-            {
-                Id = Guid.NewGuid(),
-                Blank = MockBlanks.Blanks.Last(),
+                Blank = MockBlanks.Blanks.Skip(1).First(),
                 Messages = new List<Message>()
                 {
                     new Message()

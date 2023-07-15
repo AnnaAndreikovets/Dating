@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "LXwxteFsKw8UXecNLnUC2Pm7qHY8rsS/q/yJf8vBDVY=",
+  "Hash": "L6SDF56+ogMGTAuOsMYyMJWgQsVHQT1ezKQZ+oxJ1I4=",
   "Source": "DatingSite",
   "BasePath": "_content/DatingSite",
   "Mode": "Default",
@@ -85,12 +85,12 @@
       "OriginalItemSpec": "wwwroot\\img\\AndreyKulkov.jpg"
     },
     {
-      "Identity": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\img\\AnnaAndreikovets.jpg",
+      "Identity": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\img\\AnnaAndreikovets_.jpg",
       "SourceId": "DatingSite",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\",
       "BasePath": "_content/DatingSite",
-      "RelativePath": "img/AnnaAndreikovets.jpg",
+      "RelativePath": "img/AnnaAndreikovets_.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -99,7 +99,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\img\\AnnaAndreikovets.jpg"
+      "OriginalItemSpec": "wwwroot\\img\\AnnaAndreikovets_.jpg"
     },
     {
       "Identity": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\img\\IrinaNugeva.jpg",

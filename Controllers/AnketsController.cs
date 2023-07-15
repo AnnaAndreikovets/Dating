@@ -8,10 +8,12 @@ namespace DatingSite.Controllers
     public class AnketsController : Controller
     {
         readonly IBlank blank;
+        readonly IChat chat;
 
-        public AnketsController(IBlank blank)
+        public AnketsController(IBlank blank, IChat chat)
         {
             this.blank = blank;
+            this.chat = chat;
         }
 
         [Route("Ankets/List")]
@@ -32,14 +34,16 @@ namespace DatingSite.Controllers
             
             if(like)
             {
-                Chat chat = new Chat()
+                Chat _chat = new Chat()
                 {
                     Id = Guid.NewGuid(),
                     Blank = _blank
                 };
 
+                chat.AddChat(_chat);
+                
                 _blank.Like = true;
-                _blank.ChatId = chat.Id;
+                _blank.ChatId = _chat.Id;
             }
 
             _blank.See = true;

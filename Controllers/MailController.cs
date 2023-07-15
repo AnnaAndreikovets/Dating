@@ -7,17 +7,19 @@ namespace DatingSite.Controllers
 {
     public class MailController : Controller
     {
-        readonly IChat chatRepository;
+        readonly IChat chat;
+        readonly IBlank blank;
 
-        public MailController(IChat chatRepository)
+        public MailController(IChat chat, IBlank blank)
         {
-            this.chatRepository = chatRepository;
+            this.chat = chat;
+            this.blank = blank;
         }
 
         [Route("Mail/List")]
         public IActionResult List()
         {
-            IEnumerable<Chat> chats = chatRepository.Chats().OrderByDescending(c => c.Messages is not null ? c.Messages.Last().Time : DateTime.Now);
+            IEnumerable<Chat> chats = chat.Chats().OrderByDescending(c => c.Messages is not null ? c.Messages.Last().Time : DateTime.Now);
             
             return View(chats);
         }
@@ -26,9 +28,12 @@ namespace DatingSite.Controllers
         public IActionResult Chat(Guid id)
         {
             //vm
-            Chat chat = chatRepository.Chat(id);
+            Blank _blank = blank.Person(id);
+            Console.WriteLine(_blank.ChatId);
+            Chat _chat = chat.Chat(_blank.ChatId);
+            Console.WriteLine(_chat + " -c");
 
-            return View(chat);
+            return View(_chat);
         }
     }
 }

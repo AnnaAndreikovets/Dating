@@ -1,1 +1,41 @@
-<p>Chat</p>
+@model Chat
+
+<div class="card mb-4 box-shadow col-md-8 order-md-1">
+  <div class="media text-muted pt-3">
+    <p><a class="btn btn-warning" href="/Profile/User">Profile</a></p>
+    @Model.Blank.FirstName @Model.Blank.SecondName
+    <p><a class="btn btn-warning" href="/Profile/User">Basket</a></p>
+  </div>
+  <hr/>
+
+  Пример:
+
+<div style="overflow:scroll; height:200px; width:100px;">
+  <p>Text</p>
+  <p>Text</p>
+  <p>Text</p>
+  <p>Text</p>
+  <p>Text</p>
+  <p>Text</p>
+  <p>Text</p>
+  <p>Text</p>
+  <p>Text</p>
+  <p>Text</p>
+  <p>Text</p>
+  <p>Text</p>
+  <p>Text</p>
+</div>
+ 
+
+  <hr/>
+  <div>
+    <form class="needs-validation" action="/Mail/SomeAction" method="post">
+      <div class="row">
+        <div class="btn-group">
+          <input type="text" class="form-control" required id="Message" name="Message" style="display: inline-block"/>
+          <input class="btn btn-warning" type="submit" value="->" style="display: inline-block"/>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
