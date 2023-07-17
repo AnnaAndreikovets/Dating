@@ -5,19 +5,12 @@
     <p class="border-gray" href="/">No users matching your criteria were found. Wait a bit for them to show up.</p>
 }
 else
-    {
-    <div class="col-md-4">    
-        <div class="card mb-4 box-shadow">
-            <img class="img-thumbnail" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="@Model.FirstName @Model.SecondName" src="@Model.Photo" data-holder-rendered="true">
-                <div class="card-body">
-                    <h2>@Model.FirstName @Model.SecondName</h2>
-                    <p>Years: @Model.Years</p>
-                    <p>@Model.Description</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <p><a class="btn btn-warning" href="/Ankets/Skip/{@Model.Id}/true">Like</a></p>
-                        <p><a class="btn btn-warning" href="/Ankets/Skip/{@Model.Id}">Skip</a></p>
-                </div>
-            </div>
+{
+    @Html.Partial("Anket", @Model)
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+            <p><a class="btn btn-warning" href="/Ankets/Skip/{@Model.Id}/true">Like</a></p>
+            <p><a class="btn btn-warning" href="/Ankets/Skip/{@Model.Id}">Skip</a></p>
         </div>
     </div>
 }

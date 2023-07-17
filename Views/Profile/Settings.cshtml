@@ -1,0 +1,92 @@
+@model Blank
+
+<div>
+    <div class="col-md-8 order-md-1">
+    <h1 class="mb-3">Checkout</h1>
+    <form class="needs-validation" action="http://localhost:5166/Good/Checkout2" method="post">
+        <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="Name">Name:</label>
+                <input type="text" class="form-control" required id="Name" name="Name" />
+                <div class="invalid-feedback">
+                  Valid name is required.
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="Surname">Surname:</label>
+                <input type="text" class="form-control" required id="Surname" name="Surname" />
+                <div class="invalid-feedback">
+                  Valid Surname is required.
+                </div>
+              </div>
+        </div>
+        <div class="mb-3">
+              <label for="address">Text:</label>
+              <input type="text" class="form-control" required id="Address" name="Address" placeholder="1234 Main St">
+              <div class="invalid-feedback">
+                Please enter your shipping address.
+              </div>
+        </div>
+        <div class="mb-3">
+              <label for="address">Age:</label>
+              <input type="number" class="form-control" required id="Address" name="Address" placeholder="1234 Main St">
+              <div class="invalid-feedback">
+                Please enter your shipping address.
+              </div>
+        </div>
+        <div class="mb-3">
+              <label for="address">Image</label>
+              <input type="image" class="form-control" required id="Address" name="Address" placeholder="1234 Main St">
+              <div class="invalid-feedback">
+                Please enter your shipping address.
+              </div>
+        </div>
+        <div>
+                <hr class="mb-4">
+                <input class="btn btn-primary btn-lg btn-block" type="submit" value="Complete order" />
+        </div>
+
+        <hr/>
+        <h4 class="mb-3">Sex</h4>
+
+        <div class="d-block my-3">
+            <div class="custom-control custom-radio">
+                <input id="Male" name="Male" type="radio" class="custom-control-input" checked="" required="">
+                <label class="custom-control-label" for="Male">Male</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input id="Female" name="Female" type="radio" class="custom-control-input" required="">
+                <label class="custom-control-label" for="Female">Female</label>
+            </div>
+        </div>
+
+        <h4 class="mb-3">Prefer sex</h4>
+
+        <div class="d-block my-3">
+            <div class="custom-control custom-radio">
+                <input id="PreferMale" name="PreferMale" type="radio" class="custom-control-input" checked="" required="">
+                <label class="custom-control-label" for="PreferMale">Male</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input id="PreferFemale" name="PreferFemale" type="radio" class="custom-control-input" required="">
+                <label class="custom-control-label" for="PreferFemale">Female</label>
+            </div>
+        </div>
+
+        <hr/>
+        <div class="mb-3">
+            <label for="Email">Email:</label>
+            <input type="email" class="form-control" required id="Email" name="Email" placeholder="you@example.com"/>
+            <div class="invalid-feedback"> Please enter a valid email address for shipping updates. </div>
+        </div>
+        <div class="mb-3">
+            <label for="Email">Password</label>
+            <input type="password" class="form-control" required id="Email" name="Email" placeholder="you@example.com"/>
+            <div class="invalid-feedback"> Please enter a valid email address for shipping updates. </div>
+        </div>
+    </form>
+</div>
+Сохранить
+    <p><a class="btn btn-warning" href="/Profile/User">Back</a></p>
+</div>
+

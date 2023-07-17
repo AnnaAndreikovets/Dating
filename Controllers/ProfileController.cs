@@ -30,5 +30,10 @@ namespace DatingSite.Controllers
             return View(blank.User());
         }
 
+        public IActionResult Settings()
+        {
+            return View(blank.User());
+        }
+
     }
 }
