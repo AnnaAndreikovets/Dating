@@ -19,7 +19,7 @@ namespace DatingSite.Controllers
         [Route("Ankets/List")]
         public IActionResult Index()
         {
-            Blank blank = people.PersonForLooking();
+            Blank? blank = people.PersonForLooking();
             
             if(blank is null)
             {
@@ -39,26 +39,38 @@ namespace DatingSite.Controllers
         [Route("Ankets/Skip/{guid}/{like}")]
         public IActionResult Skip(Guid guid, bool like)
         {
-            Blank? blank = people.Person(guid); //проверка, что айди верное
+            Blank? blank = people.Person(guid);
             
-            Anket anket = people.Anket(blank.Id);
-
-            if(like)
+            if(blank is not null)
             {
-                Chat _chat = new Chat()
-                {
-                    Id = Guid.NewGuid(),
-                    Blank = blank
-                };
+                Anket? anket = people.Anket(blank.Id);
 
-                chat.AddChat(_chat);
+                if(anket is not null)
+                {
+                    if(like)
+                    {
+                        /*Chat _chat = new Chat()
+                        {
+                            Id = Guid.NewGuid(),
+                            Blank = blank
+                        };
+
+                        chat.AddChat(_chat);
                 
-                anket.Like = true;
-                blank.ChatId = _chat.Id;
+                        anket.Like = true;
+                        blank.ChatId = _chat.Id;*/
+                        Like attraction = new Like()
+                        {
+                            Id = Guid.NewGuid(),
+                            UserId = guid,
+                            //UsersId =
+                        };
+                    }
+
+                    anket.See = true;
+                }
             }
 
-            anket.See = true;
-            
             return RedirectToAction("Index");
         }
     }

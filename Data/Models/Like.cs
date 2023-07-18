@@ -2,12 +2,11 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace DatingSite.Data.Models
 {
-    public class Chat
+    public class Like
     {
         [BindRequired]
         public Guid Id { get; set; }
-        [BindRequired]
-        public Blank Blank { get; set; } = null!;
-        public List<Message>? Messages { get; set; }
+        public Guid UserId { get; set; }
+        public List<Guid>? UsersId { get; set; }
     }
 }
