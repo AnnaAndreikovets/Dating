@@ -1,4 +1,4 @@
-@model Blank
+@model AnketViewModel
 
 @if(Model is null)
 {
@@ -6,11 +6,11 @@
 }
 else
 {
-    @Html.Partial("Anket", @Model)
+    @Html.Partial("Anket", @Model.Blank)
     <div class="card-body">
         <div class="d-flex justify-content-between align-items-center">
-            <p><a class="btn btn-warning" href="/Ankets/Skip/{@Model.Id}/true">Like</a></p>
-            <p><a class="btn btn-warning" href="/Ankets/Skip/{@Model.Id}">Skip</a></p>
+            <p><a class="btn btn-warning" href="/Ankets/Skip/{@Model.Blank.Id}/true">Like</a></p>
+            <p><a class="btn btn-warning" href="/Ankets/Skip/{@Model.Blank.Id}">Skip</a></p>
         </div>
     </div>
 }

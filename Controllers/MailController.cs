@@ -1,19 +1,19 @@
 using Microsoft.AspNetCore.Mvc;
-using DatingSite.Data.Repository;
 using DatingSite.Data.Models;
 using DatingSite.Data.Interfaces;
+using DatingSite.ViewModels;
 
 namespace DatingSite.Controllers
 {
     public class MailController : Controller
     {
         readonly IChat chat;
-        readonly IBlank blank;
+        readonly IPeople people;
 
-        public MailController(IChat chat, IBlank blank)
+        public MailController(IChat chat, IPeople people)
         {
             this.chat = chat;
-            this.blank = blank;
+            this.people = people;
         }
 
         [Route("Mail/List")]
@@ -21,18 +21,28 @@ namespace DatingSite.Controllers
         {
             IEnumerable<Chat> chats = chat.Chats().OrderByDescending(c => c.Messages is not null ? c.Messages.Last().Time : DateTime.Now);
             
-            return View(chats);
+            ChatsViewModel chatsViewModel = new ChatsViewModel()
+            {
+                Chats = chats
+            };
+
+            return View(chatsViewModel);
         }
 
         [Route("Mail/Chat/{id}")]
         public IActionResult Chat(Guid id)
         {
             //vm
-            Blank _blank = blank.Person(id);
+            Blank blank = people.Person(id);
             
-            Chat _chat = chat.Chat(_blank.ChatId);
+            Chat _chat = chat.Chat(blank.ChatId);
 
-            return View(_chat);
+            ChatViewModel chatViewModel = new ChatViewModel()
+            {
+                Chat = _chat
+            };
+
+            return View(chatViewModel);
         }
     
         [HttpPost]
@@ -40,7 +50,7 @@ namespace DatingSite.Controllers
         public void Message(Guid id)
         {
             Chat currentChat = chat.Chat(id);
-            Blank user = blank.User();
+            Blank user = people.User();
 
             Message _message = new Message()
             {

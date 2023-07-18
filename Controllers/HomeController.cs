@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using DatingSite.Data;
 
 namespace DatingSite.Controllers
 {
