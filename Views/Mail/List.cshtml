@@ -1,7 +1,4 @@
-@using System.Linq
-
-@model IEnumerable<Chat>
-
+@model ChatsViewModel
 @{
     string message = "The user reciprocated! Start a chat.";
     string CountUnreadMessages(Chat chat)
@@ -16,31 +13,31 @@
 <h1>Messages</h1>
 <div class="my-3 p-3 bg-white rounded box-shadow">
         @{
-            if(@Model.Count() == 0)
+            if(@Model.ChatsBlanks.Count() == 0)
             {
                 <p class="border-gray" href="/">You don't have any reciprocity yet. Start searching for a soulmate to start chat history.</p>
             }
             else
             {
-                foreach(Chat chat in @Model)
+                foreach(Tuple<Chat, Blank> chat in @Model.ChatsBlanks)
                 {
                     <div class="media text-muted pt-3">
-                        <img data-src="holder.js/32x32?theme=thumb&amp;bg=007bff&amp;fg=007bff&amp;size=1" alt="32x32" class="mr-2 rounded" style="width: 32px; height: 32px; background-size: 32px 32px; background-position: center; background-clip: content-box; background-origin: content-box; overflow: hidden; object-fit: cover;" src="@chat.Blank.Photo" data-holder-rendered="true">
+                        <img data-src="holder.js/32x32?theme=thumb&amp;bg=007bff&amp;fg=007bff&amp;size=1" alt="32x32" class="mr-2 rounded" style="width: 32px; height: 32px; background-size: 32px 32px; background-position: center; background-clip: content-box; background-origin: content-box; overflow: hidden; object-fit: cover;" src="@chat.Item2.Photo" data-holder-rendered="true">
                         <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray" href="/">
-                            <strong class="d-block text-gray-dark">@chat.Blank.FirstName @chat.Blank.SecondName</strong>
-                            <a href="/Mail/Chat/@chat.Blank.Id" class="text-muted">
-                                @if(chat.Messages is null)
+                            <strong class="d-block text-gray-dark">@chat.Item2.FirstName @chat.Item2.SecondName</strong>
+                            <a href="/Mail/Chat/@chat.Item2.Id" class="text-muted">
+                                @if(chat.Item1.Messages is null)
                                 {
                                     @message
                                 }
                                 else
                                 {
-                                    @Html.Raw(chat.Messages.Last().Text);
+                                    @Html.Raw(chat.Item1.Messages.Last().Text);
                                 }
                             </a>
                         </p>
                         <p><strong class="d-block text-danger">
-                            @CountUnreadMessages(chat)
+                            @CountUnreadMessages(chat.Item1)
                         </strong></p>
                     </div>
                 }

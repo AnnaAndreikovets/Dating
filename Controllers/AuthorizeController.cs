@@ -33,7 +33,7 @@ namespace DatingSite.Controllers
         [HttpPost]
         public async Task<IActionResult> LogInEnter() //Login POSSSST
         {
-            var form = HttpContext.Request.Form;
+            /*var form = HttpContext.Request.Form;
             
             if (!form.ContainsKey("email") || !form.ContainsKey("password")) return RedirectToAction("LogIn", new { message = "Wrong email and/or password!"});
  
@@ -44,12 +44,13 @@ namespace DatingSite.Controllers
             
             if (person is not null) return RedirectToAction("LogIn", new { message = "User is already exists!"});
 
-            return RedirectToAction("CreateAccount", new { email = email, password = password});
+            return RedirectToAction("CreateAccount", new { email = email, password = password});*/
+            throw new NotImplementedException();
         }
 
         public async Task<IActionResult> CreateAccount(string email, string password) //Login POSSSST
         {
-            var form = HttpContext.Request.Form;
+            /*var form = HttpContext.Request.Form;
 
             Byte.TryParse(form["Years"], out byte years);
 //логика для добавления картинки
@@ -78,7 +79,8 @@ namespace DatingSite.Controllers
 
             await HttpContext.SignInAsync("Cookies", new ClaimsPrincipal(claimsIdentity));
 
-            return RedirectToRoute("default");
+            return RedirectToRoute("default");*/
+            throw new NotImplementedException();
         }
 
         [HttpPost]
@@ -91,11 +93,11 @@ namespace DatingSite.Controllers
             string email = form["Email"]!;
             string password = form["Password"]!;
      
-            Blank? person = people.Blanks().FirstOrDefault(p => p.User.Email == email && p.User.Password == password);
+            User? person = people?.Users()?.FirstOrDefault(p => p.Email == email && p.Password == password);
             
             if (person is null) return RedirectToAction("LogIn", new { message = "User is not found!"});
     
-            var claims = new List<Claim> { new Claim(ClaimTypes.Name, person.User.Email) };
+            var claims = new List<Claim> { new Claim(ClaimTypes.Name, person.Email) };
             
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Cookies");
 

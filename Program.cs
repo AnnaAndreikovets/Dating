@@ -12,7 +12,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
 builder.Services.AddTransient<IPeople, PeopleRepository>();
 builder.Services.AddTransient<IChat, ChatRepository>();
-builder.Services.AddTransient<ILike, LikeRepository>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => options.LoginPath = "/Login");
 builder.Services.AddAuthorization();

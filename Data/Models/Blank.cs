@@ -8,8 +8,6 @@ namespace DatingSite.Data.Models
         [BindRequired]
         public Guid Id { get; set; }
         [BindRequired]
-        public User User { get; set; } = null!;
-        [BindRequired]
         public string FirstName { get; set; } = null!;
         [BindRequired]
         public string SecondName { get; set; } = null!;
@@ -24,7 +22,5 @@ namespace DatingSite.Data.Models
         public string Sex { get; set; } = null!;
         [BindRequired]
         public string PreferSex { get; set; } = null!;
-
-        public Guid? ChatId { get; set; }
     }
 }

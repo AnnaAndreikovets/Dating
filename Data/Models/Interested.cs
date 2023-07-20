@@ -2,11 +2,12 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace DatingSite.Data.Models
 {
-    public class Like
+    public class Interested
     {
         [BindRequired]
         public Guid Id { get; set; }
+        [BindRequired]
         public Guid UserId { get; set; }
-        public List<Guid>? UsersId { get; set; }
+        public List<Guid>? Users { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace DatingSite.Data.Mocks
             new Chat()
             {
                 Id = Guid.NewGuid(),
-                Blank = MockPeople.Blanks.Skip(1).First(),
+                BlankId = MockPeople.Blanks[1].Id,
                 Messages = new List<Message>()
                 {
                     new Message()
@@ -30,7 +30,7 @@ namespace DatingSite.Data.Mocks
                     }
                 }
             }
-        }; //чисито для теста заполнила
+        };
         
         static public List<Chat> Chats { get { return chats; } set { chats.AddRange(value); } }
     }

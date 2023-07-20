@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DatingSite.Data.Mocks
+namespace DatingSite.ViewModels
 {
-    public class MockLike
+    public class MailViewModel
     {
         
     }

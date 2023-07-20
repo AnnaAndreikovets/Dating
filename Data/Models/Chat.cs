@@ -7,7 +7,7 @@ namespace DatingSite.Data.Models
         [BindRequired]
         public Guid Id { get; set; }
         [BindRequired]
-        public Blank Blank { get; set; } = null!;
+        public Guid BlankId { get; set; }
         public List<Message>? Messages { get; set; }
     }
 }

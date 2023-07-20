@@ -4,10 +4,13 @@ namespace DatingSite.Data.Interfaces
 {
     public interface IPeople
     {
-        public Blank? PersonForLooking();
-        public Blank? Person(Guid id);
+        public User? PersonForLooking();
+        public Blank? Blank(Guid id);
         public IEnumerable<Blank> Blanks();
-        public Blank User();
-        public Anket? Anket(Guid id);
+        public Blank CurrentUser();
+        public IEnumerable<User>? Users();
+        public Interested? Interested(Guid userId);
+        public Attraction? Attraction(Guid userId);
+        public User User();
     }
 }

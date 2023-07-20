@@ -6,12 +6,29 @@ namespace DatingSite.Data.Repository
 {
     public class PeopleRepository : IPeople
     {
-        public Blank? PersonForLooking()
+        public User? PersonForLooking()
         {
-            return MockPeople.Blanks.FirstOrDefault(b => b.Sex == User().PreferSex && b.PreferSex == User().Sex && Anket(b.Id)?.See == false);
+            var user = User();
+            var attraction = Attraction(user.Id);
+
+            if(attraction is not null)
+            {
+                var result = Users()?.FirstOrDefault(u => 
+                    {
+                        Blank blank = Blank(u.BlankId)!;
+                        Blank userBlank = Blank(user.BlankId)!;
+
+                        return (!attraction.UsersAnkets?.Any(a => a.UserId.CompareTo(u.Id) == 0) ?? true) && blank.Sex == userBlank.PreferSex && blank.PreferSex == userBlank.Sex;
+                    }
+                );
+
+                return result;
+            }
+
+            return null;
         }
 
-        public Blank? Person(Guid id)
+        public Blank? Blank(Guid id)
         {
             return MockPeople.Blanks.FirstOrDefault(b => b.Id.CompareTo(id) == 0);
         }
@@ -21,14 +38,29 @@ namespace DatingSite.Data.Repository
             return MockPeople.Blanks;
         }
         
-        public Blank User()
+        public Blank CurrentUser()
         {
-            return MockPeople.User;
+            return Blank(MockPeople.User.BlankId)!;
         }
 
-        public Anket? Anket(Guid id)
+        public IEnumerable<User>? Users()
         {
-            return MockPeople.Ankets.FirstOrDefault(a => a.BlankId == id);
+            return MockPeople.Users;
+        }
+    
+        public Interested? Interested(Guid userId)
+        {
+            return MockPeople.Interesteds.FirstOrDefault(i => i.UserId.CompareTo(userId) == 0);
+        }
+
+        public Attraction? Attraction(Guid userId)
+        {
+            return MockPeople.Attractions.FirstOrDefault(a => a.UserId.CompareTo(userId) == 0);
+        }
+
+        public User User()
+        {
+            return MockPeople.User;
         }
     }
 }

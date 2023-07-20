@@ -19,11 +19,28 @@ namespace DatingSite.Controllers
         [Route("Mail/List")]
         public IActionResult List()
         {
-            IEnumerable<Chat> chats = chat.Chats().OrderByDescending(c => c.Messages is not null ? c.Messages.Last().Time : DateTime.Now);
+            /*IEnumerable<Chat>? chats = chat.Chats()?.OrderByDescending(c => c.Messages is not null ? c.Messages.Last().Time : DateTime.Now);
             
+            IEnumerable<Blank>? blanks = people.Blanks().Where(p => chats.Any(c => c.BlankId == p.Id));
+
             ChatsViewModel chatsViewModel = new ChatsViewModel()
             {
-                Chats = chats
+                Chats = chats,
+                Blanks = blanks
+            };
+
+            return View(chatsViewModel);*/
+
+            IEnumerable<Chat>? chats = chat.Chats()?.OrderByDescending(c => c.Messages is not null ? c.Messages.Last().Time : DateTime.Now);
+            
+            IEnumerable<Blank>? blanks = people.Blanks().Where(p => chats.Any(c => c.BlankId == p.Id));
+
+            //List<Tuple<Chat, Blank>> result = chats.Join(blanks, c => c.Id, b => b.ChatId, (c, b) => Tuple.Create(c, b)).ToList();
+            List<Tuple<Chat, Blank>> result = blanks.Join(chats, b => b.Id, c => c.BlankId, (c, b) => Tuple.Create(b, c)).ToList();
+
+            ChatsViewModel chatsViewModel = new ChatsViewModel()
+            {
+                ChatsBlanks = result
             };
 
             return View(chatsViewModel);
@@ -32,8 +49,7 @@ namespace DatingSite.Controllers
         [Route("Mail/Chat/{id}")]
         public IActionResult Chat(Guid id)
         {
-            //vm
-            Blank blank = people.Person(id);
+            /*Blank? blank = people.Blank(id);
             
             Chat _chat = chat.Chat(blank.ChatId);
 
@@ -42,15 +58,16 @@ namespace DatingSite.Controllers
                 Chat = _chat
             };
 
-            return View(chatViewModel);
+            return View(chatViewModel);*/
+            throw new NotImplementedException();
         }
     
         [HttpPost]
         [Route("/Mail/Message/{id}")]
         public void Message(Guid id)
         {
-            Chat currentChat = chat.Chat(id);
-            Blank user = people.User();
+            /*Chat currentChat = chat.Chat(id);
+            Blank user = people.CurrentUser();
 
             Message _message = new Message()
             {
@@ -75,7 +92,8 @@ namespace DatingSite.Controllers
                 currentChat.Messages.Add(_message);
             }
             //вернуть инфу про успешное сообщение
-            
+            */
+            throw new NotImplementedException();
         }
     }
 }

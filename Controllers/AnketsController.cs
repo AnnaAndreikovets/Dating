@@ -19,56 +19,80 @@ namespace DatingSite.Controllers
         [Route("Ankets/List")]
         public IActionResult Index()
         {
-            Blank? blank = people.PersonForLooking();
+            User? user = people.PersonForLooking();
             
+            if(user is null)
+            {
+                return View(null);
+            }
+            
+            Blank? blank = people.Blank(user.BlankId);
+
             if(blank is null)
             {
                 return View(null);
             }
             
-            AnketViewModel anketViewModel = new AnketViewModel()
+            BlankViewModel anketViewModel = new BlankViewModel()
             {
                 Blank = blank,
-                Anket = people.Anket(blank.Id)
+                User = user
             };
             
             return View(anketViewModel);
         }
 
-        [Route("Ankets/Skip/{guid}")]
-        [Route("Ankets/Skip/{guid}/{like}")]
-        public IActionResult Skip(Guid guid, bool like)
+        [Route("Ankets/Skip/{id}")]
+        [Route("Ankets/Skip/{id}/{like}")]
+        public IActionResult Skip(Guid id, bool like)
         {
-            Blank? blank = people.Person(guid);
+            //выполрнить логику по выполнению данных только если все данные правильные
+            Guid userId = people.User().Id;
             
-            if(blank is not null)
+            Attraction? attractionUser = people.Attraction(userId);
+            Attraction? attractionUser2 = people.Attraction(id);
+
+            if(attractionUser is null || attractionUser2 is null)
             {
-                Anket? anket = people.Anket(blank.Id);
+                throw new ArgumentException();
+            }
 
-                if(anket is not null)
+            if(attractionUser.UsersAnkets is null)
+            {
+                attractionUser.UsersAnkets = new List<Anket>();
+            }
+
+            if(attractionUser2.UsersAnkets is null)
+            {
+                attractionUser2.UsersAnkets = new List<Anket>();
+            }
+
+            attractionUser.UsersAnkets.Add(new Anket()
+            {
+                Id = Guid.NewGuid(),
+                UserId = id,
+            });
+            attractionUser2.UsersAnkets.Add(new Anket()
+            {
+                Id = Guid.NewGuid(),
+                UserId = userId,
+            });
+
+            if(like)
+            {
+                Interested? interested = people.Interested(id);
+
+                if(interested is null)
                 {
-                    if(like)
-                    {
-                        /*Chat _chat = new Chat()
-                        {
-                            Id = Guid.NewGuid(),
-                            Blank = blank
-                        };
-
-                        chat.AddChat(_chat);
-                
-                        anket.Like = true;
-                        blank.ChatId = _chat.Id;*/
-                        Like attraction = new Like()
-                        {
-                            Id = Guid.NewGuid(),
-                            UserId = guid,
-                            //UsersId =
-                        };
-                    }
-
-                    anket.See = true;
+                    throw new ArgumentException();
                 }
+
+                if(interested.Users is null)
+                {
+                    interested.Users = new List<Guid>();
+                }
+                
+                interested.Users.Add(userId);
             }
 
             return RedirectToAction("Index");

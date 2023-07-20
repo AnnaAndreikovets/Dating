@@ -16,22 +16,21 @@ namespace DatingSite.Controllers
         [Route("Profile/Index/{guid}")]
         public IActionResult Index(Guid guid)
         {
-            //для отображения профиля через сообщение
             //проверка, что он нам нравится иначе вернуть дефолтную страницу
-            Blank person = people.Person(guid);
+            Blank? person = people.Blank(guid);
 
             return View(person);
         }
+        
         [Route("Profile/User")]
-        public IActionResult User()
+        new public IActionResult User()
         {
-            //для отображения нашего профиля
-            return View(people.User());
+            return View(people.CurrentUser());
         }
 
         public IActionResult Settings()
         {
-            return View(people.User());
+            return View(people.CurrentUser());
         }
 
     }
