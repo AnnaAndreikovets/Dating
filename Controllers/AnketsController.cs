@@ -8,12 +8,10 @@ namespace DatingSite.Controllers
     public class AnketsController : Controller
     {
         readonly IPeople people;
-        readonly IChat chat;
 
-        public AnketsController(IPeople blank, IChat chat)
+        public AnketsController(IPeople blank)
         {
             this.people = blank;
-            this.chat = chat;
         }
 
         [Route("Ankets/List")]
@@ -49,8 +47,8 @@ namespace DatingSite.Controllers
             //выполрнить логику по выполнению данных только если все данные правильные
             Guid userId = people.User().Id;
             
-            Attraction? attractionUser = people.Attraction(userId);
-            Attraction? attractionUser2 = people.Attraction(id);
+            Interaction? attractionUser = people.Interaction(userId);
+            Interaction? attractionUser2 = people.Interaction(id);
 
             if(attractionUser is null || attractionUser2 is null)
             {

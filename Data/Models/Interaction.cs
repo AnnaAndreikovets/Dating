@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace DatingSite.Data.Models
 {
-    public class Attraction
+    public class Interaction
     {
         [BindRequired]
         public Guid Id { get; set; }

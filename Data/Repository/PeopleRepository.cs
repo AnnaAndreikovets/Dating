@@ -1,3 +1,4 @@
+using System.Linq;
 using DatingSite.Data.Interfaces;
 using DatingSite.Data.Models;
 using DatingSite.Data.Mocks;
@@ -9,7 +10,7 @@ namespace DatingSite.Data.Repository
         public User? PersonForLooking()
         {
             var user = User();
-            var attraction = Attraction(user.Id);
+            var attraction = Interaction(user.Id);
 
             if(attraction is not null)
             {
@@ -23,6 +24,19 @@ namespace DatingSite.Data.Repository
                 );
 
                 return result;
+            }
+
+            return null;
+        }
+
+        public User? PersonForWatching()
+        {
+            var users = Interested(User().Id)?.Users;
+            
+            if(users?.Count() > 0)
+            {
+                var id = users.First();
+                return Users()?.FirstOrDefault(u => u.Id.CompareTo(id) == 0);
             }
 
             return null;
@@ -47,15 +61,15 @@ namespace DatingSite.Data.Repository
         {
             return MockPeople.Users;
         }
-    
+
         public Interested? Interested(Guid userId)
         {
-            return MockPeople.Interesteds.FirstOrDefault(i => i.UserId.CompareTo(userId) == 0);
+            return MockPeople.Interesteds?.FirstOrDefault(i => i.UserId.CompareTo(userId) == 0);
         }
 
-        public Attraction? Attraction(Guid userId)
+        public Interaction? Interaction(Guid userId)
         {
-            return MockPeople.Attractions.FirstOrDefault(a => a.UserId.CompareTo(userId) == 0);
+            return MockPeople.Interactions.FirstOrDefault(a => a.UserId.CompareTo(userId) == 0);
         }
 
         public User User()

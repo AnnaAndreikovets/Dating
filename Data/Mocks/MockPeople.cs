@@ -217,66 +217,82 @@ namespace DatingSite.Data.Mocks
     
         static public List<User> Users { get { return users; } set { users.AddRange(value); } }
         
-        static List<Attraction> attractions = new List<Attraction>(){
-            new Attraction()
+        static List<Interaction> interactions = new List<Interaction>(){
+            new Interaction()
             {
                 Id = Guid.NewGuid(),
                 UserId = users[0].Id
             },
-            new Attraction()
+            new Interaction()
             {
                 Id = Guid.NewGuid(),
-                UserId = users[1].Id
+                UserId = users[1].Id,
+                UsersAnkets = new List<Anket>()
+                {
+                    new Anket()
+                    {
+                        Id = Guid.NewGuid(),
+                        UserId = User.Id
+                    }
+                }
             },
-            new Attraction()
+            new Interaction()
             {
                 Id = Guid.NewGuid(),
                 UserId = users[2].Id
             },
-            new Attraction()
+            new Interaction()
             {
                 Id = Guid.NewGuid(),
                 UserId = users[3].Id
             },
-            new Attraction()
+            new Interaction()
             {
                 Id = Guid.NewGuid(),
                 UserId = users[4].Id
             },
-            new Attraction()
+            new Interaction()
             {
                 Id = Guid.NewGuid(),
                 UserId = users[5].Id
             },
-            new Attraction()
+            new Interaction()
             {
                 Id = Guid.NewGuid(),
                 UserId = users[6].Id
             },
-            new Attraction()
+            new Interaction()
             {
                 Id = Guid.NewGuid(),
                 UserId = users[7].Id
             },
-            new Attraction()
+            new Interaction()
             {
                 Id = Guid.NewGuid(),
                 UserId = users[8].Id
             },
-            new Attraction()
+            new Interaction()
             {
                 Id = Guid.NewGuid(),
                 UserId = users[9].Id
             },
             //удалить
-            new Attraction()
+            new Interaction()
             {
                 Id = Guid.NewGuid(),
-                UserId = User.Id
+                UserId = User.Id,
+                UsersAnkets = new List<Anket>()
+                {
+                    new Anket()
+                    {
+                        Id = Guid.NewGuid(),
+                        UserId = users[1].Id
+                    }
+                }
             },
         };
         
-        static public List<Attraction> Attractions { get { return attractions; } set { attractions.AddRange(value); } }
+        static public List<Interaction> Interactions { get { return interactions; } set { interactions.AddRange(value); } }
         static List<Interested> interesteds = new List<Interested>()
         {
             new Interested()
@@ -333,7 +349,11 @@ namespace DatingSite.Data.Mocks
             new Interested()
             {
                 Id = Guid.NewGuid(),
-                UserId = User.Id
+                UserId = User.Id,
+                Users = new List<Guid>()
+                {
+                    users[1].Id
+                },
             },
         };
         static public List<Interested> Interesteds { get { return interesteds; } set { interesteds.AddRange(value); } }
