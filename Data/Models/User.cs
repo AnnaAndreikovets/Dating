@@ -16,7 +16,5 @@ namespace DatingSite.Data.Models
         [BindRequired]
         [DataType(DataType.Password)]
         public string Password { get; set; } = null!;
-
-        public Guid? ChatId { get; set; }
     }
 }

@@ -14,5 +14,9 @@ namespace DatingSite.Data.Interfaces
         public Interaction? Interaction(Guid userId);
         public User User();
         public User? User(Guid id);
+        public void AddUser(User user);
+        public void AddInteractions(Interaction interaction);
+        public void AddInterested(Interested interested);
+        public void AddBlank(Blank blank);
     }
 }

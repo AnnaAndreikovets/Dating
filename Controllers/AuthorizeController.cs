@@ -1,9 +1,6 @@
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using DatingSite.Data.Interfaces;
 using DatingSite.Data.Models;
 
@@ -19,91 +16,115 @@ namespace DatingSite.Controllers
         }
 
         [HttpGet]
-        public IActionResult LogIn(string message = "Log in!")
+        [Route("Authorize/LogIn")]
+        public IActionResult LogIn()
         {
-            return View(message);
+            return View();
         }
         
         [HttpGet]
-        public IActionResult SignIn(string message = "Log in!")
+        [Route("Authorize/SignIn")]
+        public IActionResult SignIn()
         {
-            return View(message);
+            return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> LogInEnter() //Login POSSSST
+        public async Task<IActionResult> LogInEnter()
         {
-            /*var form = HttpContext.Request.Form;
-            
-            if (!form.ContainsKey("email") || !form.ContainsKey("password")) return RedirectToAction("LogIn", new { message = "Wrong email and/or password!"});
+            var form = HttpContext.Request.Form;
+
+            if (!form.ContainsKey("email") || !form.ContainsKey("password")) return RedirectToAction("LogIn"); //уведомить, что данные для входа не заданы
  
-            string email = form["Email"]!;
-            string password = form["Password"]!;
-     
-            Blank? person = people.Blanks().FirstOrDefault(p => p.User.Email == email && p.User.Password == password);
+            string email = form["email"]!;
+            string password = form["password"]!;
+
+            if(people is null)
+            {
+                throw new NullReferenceException();
+            }
+
+            User? user = people!.Users()?.FirstOrDefault(p => p.Email == email);
             
-            if (person is not null) return RedirectToAction("LogIn", new { message = "User is already exists!"});
+            if (user is not null) return RedirectToAction("LogIn"); //уведомить, что такой пользователь уже существует
+            
+            if (!form.ContainsKey("firstName") || !form.ContainsKey("secondName")  || !form.ContainsKey("years") || !form.ContainsKey("photo") || 
+            !form.ContainsKey("description") || !form.ContainsKey("sex") || !form.ContainsKey("preferSex")) return RedirectToAction("LogIn"); //уведомить, что данные не заданы
+            
+            string firstName = form["firstName"]!;
+            string secondName = form["secondName"]!;
+            string photo = form["photo"]!;
+            string description = form["description"]!;
+            string sex = form["sex"]!;
+            string preferSex = form["preferSex"]!;
+            Byte.TryParse(form["years"], out byte years);
 
-            return RedirectToAction("CreateAccount", new { email = email, password = password});*/
-            throw new NotImplementedException();
-        }
+            //добавть в wwwroot/img изображение
 
-        public async Task<IActionResult> CreateAccount(string email, string password) //Login POSSSST
-        {
-            /*var form = HttpContext.Request.Form;
-
-            Byte.TryParse(form["Years"], out byte years);
-//логика для добавления картинки
-//проверка, что все значения заданы корректно
-            Blank person = new Blank()
+            Blank blank = new Blank()
             {
                 Id = Guid.NewGuid(),
-                FirstName = form["FirstName"],
-                SecondName = form["SecondName"],
+                FirstName = firstName,
+                SecondName = secondName,
                 Years = years,
-                Photo = "", //сюда добавить свой путь
-                Description = form["Description"],
-                Sex = form["Sex"],
-                PreferSex = form["PreferSex"],
-                
-                User = new User()
-                {
-                    Email = email,
-                    Password = password
-                }
+                Photo = photo,
+                Description = description,
+                Sex = sex,
+                PreferSex = preferSex
             };
+            user = new User()
+            {
+                Id = Guid.NewGuid(),
+                BlankId = blank.Id,
+                Email = email,
+                Password = password
+            };
+            Interaction interaction = new Interaction()
+            {
+                Id = Guid.NewGuid(),
+                UserId = user.Id
+            };
+            Interested interested = new Interested()
+            {
+                Id = Guid.NewGuid(),
+                UserId = user.Id
+            };
+            
+            people.AddInterested(interested);
+            people.AddInteractions(interaction);
+            people.AddBlank(blank);
+            people.AddUser(user);
 
-            var claims = new List<Claim> { new Claim(ClaimTypes.Name, person.User.Email) };
+            var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Email) };
             
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Cookies");
 
             await HttpContext.SignInAsync("Cookies", new ClaimsPrincipal(claimsIdentity));
 
-            return RedirectToRoute("default");*/
-            throw new NotImplementedException();
+            return RedirectToAction("CreateAccount");
         }
 
         [HttpPost]
-        public async Task<IActionResult> SignInEnter() //Login POSSSST
+        public async Task<IActionResult> SignInEnter()
         {
             var form = HttpContext.Request.Form;
             
-            if (!form.ContainsKey("email") || !form.ContainsKey("password")) return RedirectToAction("LogIn", new { message = "Wrong email and/or password!"});
+            if (!form.ContainsKey("email") || !form.ContainsKey("password")) return RedirectToAction("SignIn"); //уведомить, что данные незаданы
  
-            string email = form["Email"]!;
-            string password = form["Password"]!;
-     
+            string email = form["email"]!;
+            string password = form["password"]!;
+
             User? person = people?.Users()?.FirstOrDefault(p => p.Email == email && p.Password == password);
             
-            if (person is null) return RedirectToAction("LogIn", new { message = "User is not found!"});
-    
+            if (person is null) return RedirectToAction("SignIn"); //уведомить, что неверные данные
+            
             var claims = new List<Claim> { new Claim(ClaimTypes.Name, person.Email) };
             
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Cookies");
 
             await HttpContext.SignInAsync("Cookies", new ClaimsPrincipal(claimsIdentity));
 
-            return RedirectToRoute("default");
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]

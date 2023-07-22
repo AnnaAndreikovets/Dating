@@ -81,5 +81,25 @@ namespace DatingSite.Data.Repository
         {
             return Users()?.FirstOrDefault(u => u.Id.CompareTo(id) == 0);
         }
+    
+        public void AddUser(User user)
+        {
+            MockPeople.User = user;
+            MockPeople.Users.Add(user);
+        }
+
+        public void AddInteractions(Interaction interaction)
+        {
+            MockPeople.Interactions.Add(interaction);
+        }
+        
+        public void AddInterested(Interested interested)
+        {
+            MockPeople.Interesteds.Add(interested);
+        }
+        public void AddBlank(Blank blank)
+        {
+            MockPeople.Blanks.Add(blank);
+        }
     }
 }
