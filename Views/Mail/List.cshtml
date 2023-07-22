@@ -13,13 +13,13 @@
 <h1>Messages</h1>
 <div class="my-3 p-3 bg-white rounded box-shadow">
         @{
-            if(@Model.ChatsBlanks.Count() == 0)
+            if(@Model is null || @Model?.ChatsBlanks.Count() == 0)
             {
                 <p class="border-gray" href="/">You don't have any reciprocity yet. Start searching for a soulmate to start chat history.</p>
             }
             else
             {
-                foreach(Tuple<Chat, Blank> chat in @Model.ChatsBlanks)
+                foreach(Tuple<Chat, Blank> chat in @Model!.ChatsBlanks)
                 {
                     <div class="media text-muted pt-3">
                         <img data-src="holder.js/32x32?theme=thumb&amp;bg=007bff&amp;fg=007bff&amp;size=1" alt="32x32" class="mr-2 rounded" style="width: 32px; height: 32px; background-size: 32px 32px; background-position: center; background-clip: content-box; background-origin: content-box; overflow: hidden; object-fit: cover;" src="@chat.Item2.Photo" data-holder-rendered="true">

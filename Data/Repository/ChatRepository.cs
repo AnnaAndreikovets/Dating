@@ -8,17 +8,17 @@ namespace DatingSite.Data.Repository
     {
         public Chat? Chat(Guid? id)
         {
-            return MockMessages.Chats.FirstOrDefault(c => c.Id.CompareTo(id) == 0);
+            return Chats()?.FirstOrDefault(c => c.Id.CompareTo(id) == 0);
         }
 
-        public void AddChat(Chat chat)
+        public Chats? Chats(Guid id)
         {
-            MockMessages.Chats.Add(chat);
+            return MockMessages.Chats?.FirstOrDefault(c => c.UserId.CompareTo(id) == 0);
         }
 
-        public IEnumerable<Chat>? Chats()
+        public List<Chat>? Chats()
         {
-            return MockMessages.Chats;
+            return Chats(MockPeople.User.Id)?.UserChats;
         }
     }
 }

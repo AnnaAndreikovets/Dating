@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Xml.Linq;
 using Microsoft.AspNetCore.Mvc;
 using DatingSite.Data.Interfaces;
 using DatingSite.Data.Models;
@@ -78,24 +75,58 @@ namespace DatingSite.Controllers
         [Route("Interaction/Like/{id}")]
         public IActionResult Like(Guid id)
         {
-            void Delete(Guid id1, Guid id2)
+            void LikeAndAddChat(Guid id1, Guid id2)
             {
                 var anket = people.Interaction(id1)?.UsersAnkets?.FirstOrDefault(a => a.UserId == id2);
 
-                if(anket is not null)
+                if(anket is null)
                 {
-                    anket.See = true;
+                    throw new Exception();
                 }
 
-                //так же тут надо добавить чат
+                anket.Like = true;
+
+                User? user1 = people.User(id1);
+                User? user2 = people.User(id2);
+
+                if(user1 is null || user2 is null)
+                {
+                    throw new Exception();
+                }
+
+                Chats? chats = chat.Chats(id1);
+
+                if(chats is null)
+                {
+                    chats = new Chats()
+                    {
+                        Id = Guid.NewGuid(),
+                        UserId = id1
+                    };
+                }
+                
+                var userChats = chats.UserChats;
+
+                if(userChats is null)
+                {
+                    userChats = new List<Chat>();
+                }
+
+                Chat userChat = new Chat()
+                {
+                    Id = new Guid(),
+                    BlankId = user2.BlankId
+                };
+
+                userChats.Add(userChat);
             }
 
             var userId = people.User().Id;
 
-            Delete(id, userId);
-            Delete(userId, id);
+            LikeAndAddChat(id, userId);
+            LikeAndAddChat(userId, id);
 
-            return Dislike(id);
+            return RedirectToAction("Dislike", new {id = id});
         }
     }
 }

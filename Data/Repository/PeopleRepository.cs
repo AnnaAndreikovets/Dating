@@ -36,7 +36,7 @@ namespace DatingSite.Data.Repository
             if(users?.Count() > 0)
             {
                 var id = users.First();
-                return Users()?.FirstOrDefault(u => u.Id.CompareTo(id) == 0);
+                return User(id);
             }
 
             return null;
@@ -75,6 +75,11 @@ namespace DatingSite.Data.Repository
         public User User()
         {
             return MockPeople.User;
+        }
+    
+        public User? User(Guid id)
+        {
+            return Users()?.FirstOrDefault(u => u.Id.CompareTo(id) == 0);
         }
     }
 }

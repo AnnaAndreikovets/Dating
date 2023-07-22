@@ -13,5 +13,6 @@ namespace DatingSite.Data.Interfaces
         public Interested? Interested(Guid userId);
         public Interaction? Interaction(Guid userId);
         public User User();
+        public User? User(Guid id);
     }
 }

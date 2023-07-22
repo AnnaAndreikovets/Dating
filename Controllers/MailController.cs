@@ -19,31 +19,23 @@ namespace DatingSite.Controllers
         [Route("Mail/List")]
         public IActionResult List()
         {
-            /*IEnumerable<Chat>? chats = chat.Chats()?.OrderByDescending(c => c.Messages is not null ? c.Messages.Last().Time : DateTime.Now);
+            IEnumerable<Chat>? userChat = chat.Chats()?.OrderByDescending(c => c.Messages is not null ? c.Messages.Last().Time : DateTime.Now);
             
-            IEnumerable<Blank>? blanks = people.Blanks().Where(p => chats.Any(c => c.BlankId == p.Id));
-
-            ChatsViewModel chatsViewModel = new ChatsViewModel()
+            if(userChat is not null)
             {
-                Chats = chats,
-                Blanks = blanks
-            };
-
-            return View(chatsViewModel);*/
-
-            IEnumerable<Chat>? chats = chat.Chats()?.OrderByDescending(c => c.Messages is not null ? c.Messages.Last().Time : DateTime.Now);
+                IEnumerable<Blank>? blanks = people.Blanks().Where(p => userChat.Any(c => c.BlankId == p.Id));
             
-            IEnumerable<Blank>? blanks = people.Blanks().Where(p => chats.Any(c => c.BlankId == p.Id));
+                List<Tuple<Chat, Blank>> result = blanks.Join(userChat, b => b.Id, c => c.BlankId, (c, b) => Tuple.Create(b, c)).ToList();
 
-            //List<Tuple<Chat, Blank>> result = chats.Join(blanks, c => c.Id, b => b.ChatId, (c, b) => Tuple.Create(c, b)).ToList();
-            List<Tuple<Chat, Blank>> result = blanks.Join(chats, b => b.Id, c => c.BlankId, (c, b) => Tuple.Create(b, c)).ToList();
+                ChatsViewModel chatsViewModel = new ChatsViewModel()
+                {
+                    ChatsBlanks = result
+                };
 
-            ChatsViewModel chatsViewModel = new ChatsViewModel()
-            {
-                ChatsBlanks = result
-            };
+                return View(chatsViewModel);
+            }
 
-            return View(chatsViewModel);
+            return View();
         }
 
         [Route("Mail/Chat/{id}")]
