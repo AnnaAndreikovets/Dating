@@ -1,4 +1,3 @@
-using System.Linq;
 using DatingSite.Data.Interfaces;
 using DatingSite.Data.Models;
 using DatingSite.Data.Mocks;
@@ -84,8 +83,13 @@ namespace DatingSite.Data.Repository
     
         public void AddUser(User user)
         {
-            MockPeople.User = user;
+            SetUser(user);
             MockPeople.Users.Add(user);
+        }
+
+        public void SetUser(User user)
+        {
+            MockPeople.User = user;
         }
 
         public void AddInteractions(Interaction interaction)
@@ -97,6 +101,7 @@ namespace DatingSite.Data.Repository
         {
             MockPeople.Interesteds.Add(interested);
         }
+        
         public void AddBlank(Blank blank)
         {
             MockPeople.Blanks.Add(blank);

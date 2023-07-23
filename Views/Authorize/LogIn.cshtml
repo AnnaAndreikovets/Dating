@@ -1,18 +1,109 @@
 <div class="text-center" style="display: -ms-flexbox; display: -webkit-box; display: flex; -ms-flex-align: center; -ms-flex-pack: center; -webkit-box-align: center; align-items: center; -webkit-box-pack: center; justify-content: center; padding-top: 40px; padding-bottom: 40px;">
-    <form class="form-signin" action="/Authorize/SignInEnter" method="post">
-      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <form class="form-login" action="/Authorize/LogInEnter" method="post" enctype="multipart/form-data">
+      <h1 class="h3 mb-3 font-weight-normal">Please log in</h1>
       <label for="email" class="sr-only">Email address</label>
       <input type="email" id="email" class="form-control" placeholder="Email address" name="email" required autofocus>
+
       <br/>
+      
       <label for="password" class="sr-only">Password</label>
       <input type="password" id="password" class="form-control" placeholder="Password" name="password" required>
       <hr/>
-      Тут будут заданы данные пользовательские
+      
+      <h1 class="h3 mb-3 font-weight-normal">Anket</h1>
+
+      <label for="firstName" class="sr-only">Name:</label>
+      <input type="text" id="firstName" class="form-control" placeholder="Name" name="firstName" required>
+
+      <br/>
+
+      <label for="secondName" class="sr-only">Surname:</label>
+      <input type="text" id="secondName" class="form-control" placeholder="Surname" name="secondName" required>
+
+      <br/>
+
+      <label for="description" class="sr-only">Text:</label>
+      <input type="text" id="description" class="form-control" placeholder="Hellow! My name..." name="description" required>
+
+      <br/>
+
+      <label for="age" class="sr-only">Age:</label>
+      <input type="number" id="age" class="form-control" placeholder="Age" name="age" min="0" max="150" required>
+
+      <br/>
+
+      <div>
+        <style>
+          .custom-file-upload {
+          display: inline-block;
+          cursor: pointer;
+          padding: 6px 12px;
+          font-size: 14px;
+          color: #fff;
+          background-color: #007aff;
+          border-color: #007aff;
+          border-radius: 4px;
+          }
+
+          input[type="file"] {
+            display: none;
+          }
+        </style>
+
+        <input type="file" name="photo" accept="image/*" id="photo" required>
+        <label for="photo" class="custom-file-upload">Choose your photo</label>
+        <span id="file-name">File not selected</span>
+
+        <script>
+          const input = document.getElementById('photo');
+          const fileNameSpan = document.getElementById('file-name');
+
+          input.addEventListener('change', (e) => {
+          const file = e.target.files[0];
+          fileNameSpan.textContent = file ? file.name : 'File not selected';
+          });
+        </script>
+      </div>
+      
+      <hr/>
+
+      <fieldset>
+        <p><label for="sex">Sex:</label></p>
+        <div id="sex">
+          <input type="radio" id="maleS" name="sex" value="male" checked>
+          <label for="maleS">Male</label>
+        </div>
+
+        <div>
+          <input type="radio" id="femaleS" name="sex" value="female">
+          <label for="femaleS">Female</label>
+        </div>
+      </fieldset>
+
+      <hr/>
+
+      <fieldset>
+        <p><label for="preferSex">Prefer sex:</label></p>
+        <div id="preferSex">
+          <input type="radio" id="malePS" name="preferSex" value="male">
+          <label for="malePS">Male</label>
+        </div>
+
+        <div>
+          <input type="radio" id="femalePS" name="preferSex" value="female" checked>
+          <label for="femalePS">Female</label>
+        </div>
+      </fieldset>
+
+      <br/>
+
       <div class="checkbox mb-3">
         <label>
           <input type="checkbox" value="remember-me"> Remember me
         </label>
       </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </div>
+
+      <button class="btn btn-lg btn-primary btn-block" type="submit">create an account</button>
     </form>
 </div>

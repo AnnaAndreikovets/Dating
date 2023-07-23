@@ -30,6 +30,7 @@ namespace DatingSite.Controllers
         }
 
         [HttpPost]
+        [Route("Authorize/LogInEnter")]
         public async Task<IActionResult> LogInEnter()
         {
             var form = HttpContext.Request.Form;
@@ -38,7 +39,6 @@ namespace DatingSite.Controllers
  
             string email = form["email"]!;
             string password = form["password"]!;
-
             if(people is null)
             {
                 throw new NullReferenceException();
@@ -47,27 +47,36 @@ namespace DatingSite.Controllers
             User? user = people!.Users()?.FirstOrDefault(p => p.Email == email);
             
             if (user is not null) return RedirectToAction("LogIn"); //уведомить, что такой пользователь уже существует
-            
-            if (!form.ContainsKey("firstName") || !form.ContainsKey("secondName")  || !form.ContainsKey("years") || !form.ContainsKey("photo") || 
+
+            if (!form.ContainsKey("firstName") || !form.ContainsKey("secondName")  || !form.ContainsKey("age") || form.Files.GetFile("photo") is null || 
             !form.ContainsKey("description") || !form.ContainsKey("sex") || !form.ContainsKey("preferSex")) return RedirectToAction("LogIn"); //уведомить, что данные не заданы
-            
+
             string firstName = form["firstName"]!;
             string secondName = form["secondName"]!;
-            string photo = form["photo"]!;
             string description = form["description"]!;
             string sex = form["sex"]!;
             string preferSex = form["preferSex"]!;
-            Byte.TryParse(form["years"], out byte years);
+            Byte.TryParse(form["age"], out byte age);
+            var photo = form.Files.GetFile("photo")!;
+            
+            var newFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(photo.FileName);
+            var directoryPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img");
+            string imagePath = Path.Combine(directoryPath, newFileName);
 
-            //добавть в wwwroot/img изображение
+            using (var stream = new FileStream(imagePath, FileMode.Create))
+            {
+                photo.CopyTo(stream);
+            }
+
+            imagePath = Path.Combine("/images", newFileName);
 
             Blank blank = new Blank()
             {
                 Id = Guid.NewGuid(),
                 FirstName = firstName,
                 SecondName = secondName,
-                Years = years,
-                Photo = photo,
+                Age = age,
+                Photo = $"/img/{newFileName}",
                 Description = description,
                 Sex = sex,
                 PreferSex = preferSex
@@ -101,10 +110,11 @@ namespace DatingSite.Controllers
 
             await HttpContext.SignInAsync("Cookies", new ClaimsPrincipal(claimsIdentity));
 
-            return RedirectToAction("CreateAccount");
+            return RedirectPermanent("/Home/Index");
         }
 
         [HttpPost]
+        [Route("Authorize/SignInEnter")]
         public async Task<IActionResult> SignInEnter()
         {
             var form = HttpContext.Request.Form;
@@ -114,25 +124,29 @@ namespace DatingSite.Controllers
             string email = form["email"]!;
             string password = form["password"]!;
 
-            User? person = people?.Users()?.FirstOrDefault(p => p.Email == email && p.Password == password);
+            User? user = people?.Users()?.FirstOrDefault(p => p.Email == email && p.Password == password);
             
-            if (person is null) return RedirectToAction("SignIn"); //уведомить, что неверные данные
+            if (user is null) return RedirectToAction("SignIn"); //уведомить, что неверные данные
             
-            var claims = new List<Claim> { new Claim(ClaimTypes.Name, person.Email) };
+            people!.SetUser(user);
+
+            var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Email) };
             
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Cookies");
 
             await HttpContext.SignInAsync("Cookies", new ClaimsPrincipal(claimsIdentity));
 
-            return RedirectToAction("Index", "Home");
+            return RedirectPermanent("/Home/Index");
         }
 
-        [HttpPost]
+        [Route("Authorize/LogOut")]
         public async Task<IActionResult> LogOut()
         {
+            people.SetUser(new User());
+
             await HttpContext.SignOutAsync("Cookies");
 
-            return RedirectToAction("Login");
+            return View();
         }
     }
 }

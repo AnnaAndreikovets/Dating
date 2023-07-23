@@ -12,7 +12,7 @@ namespace DatingSite.Data.Models
         [BindRequired]
         public string SecondName { get; set; } = null!;
         [BindRequired]
-        public byte Years { get; set; }
+        public byte Age { get; set; }
         [BindRequired]
         [DataType(DataType.ImageUrl)]
         public string Photo { get; set; } = null!;
