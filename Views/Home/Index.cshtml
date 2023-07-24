@@ -1,4 +1,9 @@
 <div>
+    @if(!User.Identity!.IsAuthenticated)
+    {
+        <p class="text-danger">Please create or log in an account to continue using the site!</p>
+    }
+    
     <div class="jumbotron">
         <div class="container">
             <h1 class="display-3">Dating site!</h1>

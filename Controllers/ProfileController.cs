@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using DatingSite.Data.Interfaces;
 using DatingSite.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DatingSite.Controllers
 {
+    //[Authorize]
     public class ProfileController : Controller
     {
         readonly IPeople people;

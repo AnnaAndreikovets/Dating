@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using DatingSite.Data.Interfaces;
 using DatingSite.Data.Models;
@@ -5,6 +6,7 @@ using DatingSite.ViewModels;
 
 namespace DatingSite.Controllers
 {
+    //[Authorize]
     public class InteractionController : Controller
     {
         readonly IPeople people;
@@ -103,15 +105,19 @@ namespace DatingSite.Controllers
                         Id = Guid.NewGuid(),
                         UserId = id1
                     };
+
+                    chat.AddChats(chats);
                 }
-                
+
                 var userChats = chats.UserChats;
 
                 if(userChats is null)
                 {
                     userChats = new List<Chat>();
+                    
+                    chat.AddListChats(userChats, id1);
                 }
-
+                
                 Chat userChat = new Chat()
                 {
                     Id = new Guid(),

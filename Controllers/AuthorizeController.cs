@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
@@ -140,6 +141,7 @@ namespace DatingSite.Controllers
         }
 
         [Route("Authorize/LogOut")]
+        //[Authorize]
         public async Task<IActionResult> LogOut()
         {
             people.SetUser(new User());

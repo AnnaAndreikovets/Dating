@@ -9,7 +9,7 @@ namespace DatingSite.Data.Mocks
             Id = Guid.NewGuid(),
             BlankId = Guid.NewGuid(),
             Email = "ann.andreikovets@gmail.com",
-            Password = "qwerty1234M"
+            Password = "123"
         };
 
         static List<Blank> blanks = new List<Blank>()

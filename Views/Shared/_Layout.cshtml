@@ -18,22 +18,33 @@
             <li class="nav-item active">
               <a class="nav-link" href="/">Main</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="/Mail/List">Messages</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="/Profile/User">Profile</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="/Ankets/List">People</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="/Interaction/Index">Interaction</a>
-            </li>
-            <li class="nav-item"> <a class="nav-link disabled" href="/Authorize/SignIn/">Sign in</a> </li>
-            <li class="nav-item"> <a class="nav-link disabled" href="/Authorize/LogIn/">Log in</a> </li>
-            <li class="nav-item"> <a class="nav-link disabled" href="/Authorize/LogOut/">Log out</a> </li>
-            <!--Отображать либо войти и зарегестрироваться, либо выйти-->
+            <!--if(User.Identity!.IsAuthenticated)
+            {-->
+              <li class="nav-item">
+                <a class="nav-link disabled" href="/Mail/List">Messages</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="/Profile/User">Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="/Ankets/List">People</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="/Interaction/Index">Interaction</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="/Authorize/LogOut/">Log out</a>
+              </li>
+            <!--}
+            else
+            { -->
+              <li class="nav-item">
+                <a class="nav-link disabled" href="/Authorize/SignIn/">Sign in</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="/Authorize/LogIn/">Log in</a>
+              </li>
+            <!--}-->
           </ul>
         </div>
       </nav>

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using DatingSite.Data.Models;
 using DatingSite.Data.Interfaces;
@@ -5,6 +6,7 @@ using DatingSite.ViewModels;
 
 namespace DatingSite.Controllers
 {
+    //[Authorize]
     public class MailController : Controller
     {
         readonly IChat chat;

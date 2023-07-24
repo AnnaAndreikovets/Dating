@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using DatingSite.Data.Interfaces;
 using DatingSite.Data.Models;
@@ -5,6 +6,7 @@ using DatingSite.ViewModels;
 
 namespace DatingSite.Controllers
 {
+    //[Authorize]
     public class AnketsController : Controller
     {
         readonly IPeople people;
