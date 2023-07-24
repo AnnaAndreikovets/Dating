@@ -1,92 +1,130 @@
 @model Blank
 
-<div>
-    <div class="col-md-8 order-md-1">
-    <h1 class="mb-3">Checkout</h1>
-    <form class="needs-validation" action="http://localhost:5166/Good/Checkout2" method="post">
-        <div class="row">
-              <div class="col-md-6 mb-3">
-                <label for="Name">Name:</label>
-                <input type="text" class="form-control" required id="Name" name="Name" />
-                <div class="invalid-feedback">
-                  Valid name is required.
-                </div>
-              </div>
-              <div class="col-md-6 mb-3">
-                <label for="Surname">Surname:</label>
-                <input type="text" class="form-control" required id="Surname" name="Surname" />
-                <div class="invalid-feedback">
-                  Valid Surname is required.
-                </div>
-              </div>
-        </div>
-        <div class="mb-3">
-              <label for="address">Text:</label>
-              <input type="text" class="form-control" required id="Address" name="Address" placeholder="1234 Main St">
-              <div class="invalid-feedback">
-                Please enter your shipping address.
-              </div>
-        </div>
-        <div class="mb-3">
-              <label for="address">Age:</label>
-              <input type="number" class="form-control" required id="Address" name="Address" placeholder="1234 Main St">
-              <div class="invalid-feedback">
-                Please enter your shipping address.
-              </div>
-        </div>
-        <div class="mb-3">
-              <label for="address">Image</label>
-              <input type="image" class="form-control" required id="Address" name="Address" placeholder="1234 Main St">
-              <div class="invalid-feedback">
-                Please enter your shipping address.
-              </div>
-        </div>
-        <div>
-                <hr class="mb-4">
-                <input class="btn btn-primary btn-lg btn-block" type="submit" value="Complete order" />
-        </div>
+<div class="text-center" style="display: -ms-flexbox; display: -webkit-box; display: flex; -ms-flex-align: center; -ms-flex-pack: center; -webkit-box-align: center; align-items: center; -webkit-box-pack: center; justify-content: center; padding-top: 40px; padding-bottom: 40px;">
+    <form class="form-login" action="/Profile/Change" method="post" enctype="multipart/form-data">
+      
+      <h1 class="h3 mb-3 font-weight-normal">Anket</h1>
 
-        <hr/>
-        <h4 class="mb-3">Sex</h4>
+      <label for="firstName" class="sr-only">Name:</label>
+      <input type="text" id="firstName" class="form-control" placeholder="Name" name="firstName" value="@Model.FirstName" required>
 
-        <div class="d-block my-3">
-            <div class="custom-control custom-radio">
-                <input id="Male" name="Male" type="radio" class="custom-control-input" checked="" required="">
-                <label class="custom-control-label" for="Male">Male</label>
-            </div>
-            <div class="custom-control custom-radio">
-                <input id="Female" name="Female" type="radio" class="custom-control-input" required="">
-                <label class="custom-control-label" for="Female">Female</label>
-            </div>
-        </div>
+      <br/>
 
-        <h4 class="mb-3">Prefer sex</h4>
+      <label for="secondName" class="sr-only">Surname:</label>
+      <input type="text" id="secondName" class="form-control" placeholder="Surname" name="secondName" value="@Model.SecondName" required>
 
-        <div class="d-block my-3">
-            <div class="custom-control custom-radio">
-                <input id="PreferMale" name="PreferMale" type="radio" class="custom-control-input" checked="" required="">
-                <label class="custom-control-label" for="PreferMale">Male</label>
-            </div>
-            <div class="custom-control custom-radio">
-                <input id="PreferFemale" name="PreferFemale" type="radio" class="custom-control-input" required="">
-                <label class="custom-control-label" for="PreferFemale">Female</label>
-            </div>
-        </div>
+      <br/>
 
-        <hr/>
-        <div class="mb-3">
-            <label for="Email">Email:</label>
-            <input type="email" class="form-control" required id="Email" name="Email" placeholder="you@example.com"/>
-            <div class="invalid-feedback"> Please enter a valid email address for shipping updates. </div>
-        </div>
-        <div class="mb-3">
-            <label for="Email">Password</label>
-            <input type="password" class="form-control" required id="Email" name="Email" placeholder="you@example.com"/>
-            <div class="invalid-feedback"> Please enter a valid email address for shipping updates. </div>
-        </div>
+      <label for="description" class="sr-only">Text:</label>
+      <input type="text" id="description" class="form-control" placeholder="Hellow! My name..." name="description" value="@Model.Description" required>
+
+      <br/>
+
+      <label for="age" class="sr-only">Age:</label>
+      <input type="number" id="age" class="form-control" placeholder="Age" name="age" min="0" max="150" value="@Model.Age" required>
+
+      <br/>
+
+      <div>
+        <style>
+          .custom-file-upload {
+          display: inline-block;
+          cursor: pointer;
+          padding: 6px 12px;
+          font-size: 14px;
+          color: #fff;
+          background-color: #007aff;
+          border-color: #007aff;
+          border-radius: 4px;
+          }
+
+          input[type="file"] {
+            display: none;
+          }
+        </style>
+
+        <input type="file" name="photo" accept="image/*" id="photo">
+        <label for="photo" class="custom-file-upload">Choose your photo</label>
+        <span id="file-name">There was no photo change</span>
+
+        <script>
+          const input = document.getElementById('photo');
+          const fileNameSpan = document.getElementById('file-name');
+
+          input.addEventListener('change', (e) => {
+          const file = e.target.files[0];
+          fileNameSpan.textContent = file ? file.name : "File not selected";
+          });
+        </script>
+      </div>
+      
+      <hr/>
+
+      <fieldset>
+        @if(Model.Sex == "male")
+        {
+          <p><label for="sex">Sex:</label></p>
+          <div id="sex">
+            <input type="radio" id="maleS" name="sex" value="male" checked>
+            <label for="maleS">Male</label>
+          </div>
+
+          <div>
+            <input type="radio" id="femaleS" name="sex" value="female">
+            <label for="femaleS">Female</label>
+          </div>
+        }
+        else
+        {
+          <p><label for="sex">Sex:</label></p>
+          <div id="sex">
+            <input type="radio" id="maleS" name="sex" value="male">
+            <label for="maleS">Male</label>
+          </div>
+
+          <div>
+            <input type="radio" id="femaleS" name="sex" value="female" checked>
+            <label for="femaleS">Female</label>
+          </div>
+        }
+      </fieldset>
+
+      <hr/>
+
+      <fieldset>
+        @if(Model.PreferSex == "male")
+        {
+          <p><label for="preferSex">Prefer sex:</label></p>
+          <div id="preferSex">
+            <input type="radio" id="malePS" name="preferSex" value="male" checked>
+            <label for="malePS">Male</label>
+          </div>
+
+          <div>
+            <input type="radio" id="femalePS" name="preferSex" value="female">
+            <label for="femalePS">Female</label>
+          </div>
+        }
+        else
+        {
+          <p><label for="preferSex">Prefer sex:</label></p>
+          <div id="preferSex">
+            <input type="radio" id="malePS" name="preferSex" value="male">
+            <label for="malePS">Male</label>
+          </div>
+
+          <div>
+            <input type="radio" id="femalePS" name="preferSex" value="female" checked>
+            <label for="femalePS">Female</label>
+          </div>
+        }
+      </fieldset>
+
+      <br/>
+
+      <button class="btn btn-lg btn-primary" type="submit">Change</button>
+      <span>
+        <a class="btn btn-lg btn-primary" href="/Profile/User">Cansel</a>
+      </span>
     </form>
 </div>
-Сохранить
-    <p><a class="btn btn-warning" href="/Profile/User">Back</a></p>
-</div>
-

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "bxbejnSZlsHRS9HhZez56VgfMKoo81ZwvZjJU/1KFhg=",
+  "Hash": "L6SDF56+ogMGTAuOsMYyMJWgQsVHQT1ezKQZ+oxJ1I4=",
   "Source": "DatingSite",
   "BasePath": "_content/DatingSite",
   "Mode": "Default",
@@ -49,40 +49,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\style.css"
-    },
-    {
-      "Identity": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\img\\04cef3d7-e5c5-4e62-badf-1db846d7d416_photo_2023-06-11_12-42-11.jpg",
-      "SourceId": "DatingSite",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\",
-      "BasePath": "_content/DatingSite",
-      "RelativePath": "img/04cef3d7-e5c5-4e62-badf-1db846d7d416_photo_2023-06-11_12-42-11.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\img\\04cef3d7-e5c5-4e62-badf-1db846d7d416_photo_2023-06-11_12-42-11.jpg"
-    },
-    {
-      "Identity": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\img\\5a8fb572-16a2-4893-9710-2c36bf173197_photo_2023-06-11_12-42-11.jpg",
-      "SourceId": "DatingSite",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\",
-      "BasePath": "_content/DatingSite",
-      "RelativePath": "img/5a8fb572-16a2-4893-9710-2c36bf173197_photo_2023-06-11_12-42-11.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\img\\5a8fb572-16a2-4893-9710-2c36bf173197_photo_2023-06-11_12-42-11.jpg"
     },
     {
       "Identity": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\img\\AlexandrMaksev.jpg",

@@ -69,7 +69,7 @@ namespace DatingSite.Controllers
                 photo.CopyTo(stream);
             }
 
-            imagePath = Path.Combine("/images", newFileName);
+            //imagePath = Path.Combine("/images", newFileName);
 
             Blank blank = new Blank()
             {
