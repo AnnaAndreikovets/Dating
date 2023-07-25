@@ -1,4 +1,4 @@
-@model Chat
+@model ChatViewModel
 
 @{
 <script type="text/javascript"> 
@@ -11,33 +11,33 @@
   {
     event.preventDefault();
     var formData = new FormData(event.target);
-    fetch('/Mail/Message/@Model.Id', { method: 'POST', body: formData }).then(response => response.json());
+    fetch('/Mail/Message/@Model.Chat.Id', { method: 'POST', body: formData }).then(response => response.json());
   }
 </script>
 }
 
 <div class="card mb-4 box-shadow col-md-8 order-md-1">
   <div class="media text-muted pt-3">
-    <p><a class="btn btn-warning" href="/Profile/User">Profile</a></p>
+    <p><a class="btn btn-warning" href="/Profile/Index/@Model.Chat.BlankId/@Model.Chat.AnketId">Profile</a></p>
     Model.Blank.FirstName Model.Blank.SecondName
-    <p><a class="btn btn-warning" href="/Profile/User">Delete</a></p>
+    <p><a class="btn btn-warning" href="/Mail/DeleteChat/@Model.Chat.BlankId/@Model.Chat.AnketId">Delete</a></p>
   </div>
   <hr/>
 <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="overflow:scroll; height:600px; width:710px;" id="response_text">
-  @if(@Model.Messages is null)
+  @if(@Model.Chat.Messages is null)
   {
     <p class="border-gray" href="/">You don't have any reciprocity yet. Start searching for a soulmate to start chat history.</p>
   }
   else
   {
-    @foreach (Message message in @Model.Messages)
+    @foreach (Message message in @Model.Chat.Messages)
     {
       <p>@message.Time.ToShortTimeString() <b>@message.Sender</b>: @message.Text</p>
     }
   }
 </div>
 <div>
-  <form action="/Mail/Message/@Model.Id" method="post" id="form" onsubmit="handleSubmit(event)">
+  <form action="/Mail/Message/@Model.Chat.Id" method="post" id="form" onsubmit="handleSubmit(event)">
     <input type="text" class="form-control" required id="message" name="message" style="display: inline-block"/>
     <input class="btn btn-warning" type="submit" value="->" style="display: inline-block" onclick="refreshPage()"/>
   </form>

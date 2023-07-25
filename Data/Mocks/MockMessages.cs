@@ -6,7 +6,8 @@ namespace DatingSite.Data.Mocks
     {
         static List<Chats> chats = new List<Chats>()
         {
-            /*new Chats(){
+            /*new Chats()
+            {
                 Id = Guid.NewGuid(),
                 UserId = MockPeople.User.Id,
                 UserChats = new List<Chat>()

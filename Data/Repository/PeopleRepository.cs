@@ -106,5 +106,15 @@ namespace DatingSite.Data.Repository
         {
             MockPeople.Blanks.Add(blank);
         }
+
+        public Anket? Anket(Guid id)
+        {
+            return Interaction(User().Id)?.UsersAnkets?.FirstOrDefault(a => a.Id.CompareTo(id) == 0);
+        }
+
+        public Anket? Anket(Guid userId, Guid secondId)
+        {
+            return Interaction(userId)?.UsersAnkets?.FirstOrDefault(a => a.UserId == secondId);
+        }
     }
 }

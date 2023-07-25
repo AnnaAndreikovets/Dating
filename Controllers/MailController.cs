@@ -43,17 +43,16 @@ namespace DatingSite.Controllers
         [Route("Mail/Chat/{id}")]
         public IActionResult Chat(Guid id)
         {
-            /*Blank? blank = people.Blank(id);
+            Blank? blank = people.Blank(id);
             
-            Chat _chat = chat.Chat(blank.ChatId);
+            Chat? _chat = chat.Chat(blank.Id);
 
             ChatViewModel chatViewModel = new ChatViewModel()
             {
                 Chat = _chat
             };
 
-            return View(chatViewModel);*/
-            throw new NotImplementedException();
+            return View(chatViewModel);
         }
     
         [HttpPost]
@@ -88,6 +87,27 @@ namespace DatingSite.Controllers
             //вернуть инфу про успешное сообщение
             */
             throw new NotImplementedException();
+        }
+        
+        [Route("Mail/DeleteChat/{blankId}/{anketId}")]
+        public IActionResult DeleteChat(Guid blankId, Guid anketId)
+        {
+            Console.WriteLine("-------");
+            User? user = people.User();
+
+            Blank? blank1 = people.Blank(user.BlankId);
+            Blank? blank2 = people.Blank(blankId);
+
+            Anket? anket2 = people.Anket(anketId);
+            Anket? anket1 = people.Anket(user.Id, anket2.UserId);
+
+            anket1.Like = false;
+            anket2.Like = false;
+        
+            chat.DeleteChat(user.Id, blank2.Id);
+            chat.DeleteChat(anket2.UserId, blank1.Id);
+            
+            return RedirectToAction("List", "Mail");
         }
     }
 }

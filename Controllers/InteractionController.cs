@@ -79,7 +79,8 @@ namespace DatingSite.Controllers
         {
             void LikeAndAddChat(Guid id1, Guid id2)
             {
-                var anket = people.Interaction(id1)?.UsersAnkets?.FirstOrDefault(a => a.UserId == id2);
+                //var anket = people.Interaction(id1)?.UsersAnkets?.FirstOrDefault(a => a.UserId == id2);
+                var anket = people.Anket(id1, id2);
 
                 if(anket is null)
                 {
@@ -121,7 +122,8 @@ namespace DatingSite.Controllers
                 Chat userChat = new Chat()
                 {
                     Id = new Guid(),
-                    BlankId = user2.BlankId
+                    BlankId = user2.BlankId,
+                    AnketId = anket.Id
                 };
 
                 userChats.Add(userChat);

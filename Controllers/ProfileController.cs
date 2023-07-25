@@ -15,13 +15,22 @@ namespace DatingSite.Controllers
             this.people = people;
         }
 
-        [Route("Profile/Index/{guid}")]
-        public IActionResult Index(Guid guid)
+        [Route("Profile/Index/{blankId}/{userId}")]
+        public IActionResult Index(Guid blankId, Guid userId)
         {
-            //проверка, что он нам нравится иначе вернуть дефолтную страницу
-            Blank? person = people.Blank(guid);
+            Anket? anket = people.Anket(userId);
 
-            return View(person);
+            if(anket is not null && anket.Like)
+            {
+                Blank? person = people.Blank(blankId);
+
+                if(person is not null)
+                {
+                    return View(person);
+                }
+            }
+
+            throw new Exception(); //bad request
         }
         
         [Route("Profile/User")]
