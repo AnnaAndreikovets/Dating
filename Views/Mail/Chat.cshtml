@@ -2,11 +2,6 @@
 
 @{
 <script type="text/javascript"> 
-  function refreshPage()
-  {
-    window.location.reload();
-  }
-
   function handleSubmit(event)
   {
     event.preventDefault();
@@ -17,30 +12,61 @@
 }
 
 <div class="card mb-4 box-shadow col-md-8 order-md-1">
-  <div class="media text-muted pt-3">
-    <p><a class="btn btn-warning" href="/Profile/Index/@Model.Chat.BlankId/@Model.Chat.AnketId">Profile</a></p>
-    Model.Blank.FirstName Model.Blank.SecondName
-    <p><a class="btn btn-warning" href="/Mail/DeleteChat/@Model.Chat.BlankId/@Model.Chat.AnketId">Delete</a></p>
+  <div class="media pt-3" style="display: flex; justify-content: space-between; align-items: center;">
+  <p style="margin: 0;"><a class="btn btn-warning" href="/Profile/Index/@Model.Chat.BlankId/@Model.Chat.AnketId">Profile</a></p>
+  <p style="margin: 0;">@Model.Blank.FirstName @Model.Blank.SecondName</p>
+  <p style="margin: 0;"><a class="btn btn-warning" href="/Mail/DeleteChat/@Model.Chat.BlankId/@Model.Chat.AnketId">Delete</a></p>
+</div>
+  <hr/>
+<!-- CHAT BAR BLOCK -->
+  <div class="chat-bar-collapsible">
+    <div class="full-chat-block">
+      <!-- Message Container -->
+      <div class="outer-container">
+        <div class="chat-container">
+          <!-- Messages -->
+            <div id="chatbox">
+                <h5 id="chat-timestamp"></h5>
+                <p id="botStarterMessage" class="botText"><span>Loading...</span></p>
+            </div>
+
+            <div class="chat-bar-input-block">
+
+            <!--<div id="userInput">
+                <input id="textInput" class="input-box" type="text" name="msg">
+                <p></p>
+            </div>
+
+            <div class="chat-bar-icons">
+                <i id="chat-icon" style="color: #333;" class="fa fa-fw fa-send" onclick="sendButton()"></i>
+            </div>-->
+            <form id="myForm" action="/Mail/Message/@Model.Blank.Id" method="POST">
+            <div id="userInput">
+              <input id="textInput" class="input-box" type="text" name="msg">
+              <p></p>
+            </div>
+
+            <input type="hidden" name="message" id="message">
+            
+            <div class="chat-bar-icons">
+              <button id="chat-button" style="color: #333;" type="button" onclick="sendButton()">
+                <i id="chat-icon" class="fa fa-fw fa-send"></i>
+              </button>
+            </div>
+          </form>
+
+          </div>
+
+          <div id="chat-bar-bottom">
+            <p></p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
   </div>
-  <hr/>
-<div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="overflow:scroll; height:600px; width:710px;" id="response_text">
-  @if(@Model.Chat.Messages is null)
-  {
-    <p class="border-gray" href="/">You don't have any reciprocity yet. Start searching for a soulmate to start chat history.</p>
-  }
-  else
-  {
-    @foreach (Message message in @Model.Chat.Messages)
-    {
-      <p>@message.Time.ToShortTimeString() <b>@message.Sender</b>: @message.Text</p>
-    }
-  }
-</div>
-<div>
-  <form action="/Mail/Message/@Model.Chat.Id" method="post" id="form" onsubmit="handleSubmit(event)">
-    <input type="text" class="form-control" required id="message" name="message" style="display: inline-block"/>
-    <input class="btn btn-warning" type="submit" value="->" style="display: inline-block" onclick="refreshPage()"/>
-  </form>
-</div>
-  <hr/>
+
+  </br>
+  
 </div>

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "L6SDF56+ogMGTAuOsMYyMJWgQsVHQT1ezKQZ+oxJ1I4=",
+  "Hash": "SoPxiXrT1QcyNoi52gEN0eAlAmJvG/VabSdiMMqd3xc=",
   "Source": "DatingSite",
   "BasePath": "_content/DatingSite",
   "Mode": "Default",
@@ -32,6 +32,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\bootstrap.min.css"
+    },
+    {
+      "Identity": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\css\\chat.css",
+      "SourceId": "DatingSite",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\",
+      "BasePath": "_content/DatingSite",
+      "RelativePath": "css/chat.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\chat.css"
     },
     {
       "Identity": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\css\\style.css",
@@ -253,6 +270,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\bootstrap.min.js"
+    },
+    {
+      "Identity": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\js\\responses.js",
+      "SourceId": "DatingSite",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\",
+      "BasePath": "_content/DatingSite",
+      "RelativePath": "js/responses.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\responses.js"
     }
   ]
 }

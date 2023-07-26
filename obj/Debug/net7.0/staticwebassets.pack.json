@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\css\\bootstrap.min.css"
     },
     {
+      "Id": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\css\\chat.css",
+      "PackagePath": "staticwebassets\\css\\chat.css"
+    },
+    {
       "Id": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\css\\style.css",
       "PackagePath": "staticwebassets\\css\\style.css"
     },
@@ -55,6 +59,10 @@
     {
       "Id": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\js\\bootstrap.min.js",
       "PackagePath": "staticwebassets\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\js\\responses.js",
+      "PackagePath": "staticwebassets\\js\\responses.js"
     },
     {
       "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.DatingSite.Microsoft.AspNetCore.StaticWebAssets.props",

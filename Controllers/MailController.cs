@@ -49,7 +49,8 @@ namespace DatingSite.Controllers
 
             ChatViewModel chatViewModel = new ChatViewModel()
             {
-                Chat = _chat
+                Chat = _chat,
+                Blank = blank
             };
 
             return View(chatViewModel);
@@ -59,40 +60,44 @@ namespace DatingSite.Controllers
         [Route("/Mail/Message/{id}")]
         public void Message(Guid id)
         {
-            /*Chat currentChat = chat.Chat(id);
-            Blank user = people.CurrentUser();
+            Chat? currentChat = chat.Chat(id);
 
-            Message _message = new Message()
+            if(currentChat is not null)
             {
-                Text = Request.Form["message"],
-                Time = DateTime.Now,
-                Sender = $"{user.FirstName} {user.SecondName}"
-            };
-            
-            if(currentChat.Messages is null)
-            {
-                _message.Id = 1;
+                Blank user = people.CurrentUser();
+                string message = Request.Form["msg"].ToString().Trim();
 
-                currentChat.Messages = new List<Message>()
+                if(!string.IsNullOrEmpty(message))
                 {
-                    _message
-                };
-            }
-            else
-            {
-                _message.Id = currentChat.Messages.Last().Id + 1;
+                    Message _message = new Message()
+                    {
+                        Text = message,
+                        Time = DateTime.Now,
+                        //Sender = $"{user.FirstName} {user.SecondName}"
+                    };
+    
+                    if(currentChat.Messages is null)
+                    {
+                        _message.Id = 1;
 
-                currentChat.Messages.Add(_message);
+                        currentChat.Messages = new List<Message>()
+                        {
+                            _message
+                        };
+                    }
+                    else
+                    {
+                        _message.Id = currentChat.Messages.Last().Id + 1;
+
+                        currentChat.Messages.Add(_message);
+                    }
+                }
             }
-            //вернуть инфу про успешное сообщение
-            */
-            throw new NotImplementedException();
         }
         
         [Route("Mail/DeleteChat/{blankId}/{anketId}")]
         public IActionResult DeleteChat(Guid blankId, Guid anketId)
         {
-            Console.WriteLine("-------");
             User? user = people.User();
 
             Blank? blank1 = people.Blank(user.BlankId);
