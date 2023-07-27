@@ -41,11 +41,21 @@ namespace DatingSite.Data.Repository
             return null;
         }
 
-        public Blank? Blank(Guid id) => MockPeople.Blanks.FirstOrDefault(b => b.Id.CompareTo(id) == 0);
+        public Blank? Blank(Guid id)
+        {
+            var blanks = Blanks();
 
-        public IEnumerable<Blank> Blanks() => MockPeople.Blanks;
+            if(blanks is null)
+            {
+                throw new NullReferenceException("Blanks are empty!");
+            }
+
+            return blanks.FirstOrDefault(b => b.Id.CompareTo(id) == 0);
+        }
+
+        public IEnumerable<Blank>? Blanks() => MockPeople.Blanks;
         
-        public Blank CurrentUser() => Blank(MockPeople.User.BlankId)!;
+        public Blank CurrentUser() => Blank(User().BlankId)!;
 
         public IEnumerable<User>? Users() => MockPeople.Users;
 

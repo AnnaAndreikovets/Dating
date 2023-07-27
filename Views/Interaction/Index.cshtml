@@ -1,22 +1,27 @@
 @model BlankViewModel
 
-@if(Model is null)
-{
-    <p class="border-gray" href="/">Wait a bit until someone sees your profile.</p>
-}
-else
-{
-    @Html.Partial("Anket", @Model.Blank)
-    <div class="card-body">
-        <div class="d-flex justify-content-between align-items-center">
-            <form action="/Interaction/Like">
-                <input type="hidden" name="id" value="@Model?.User?.Id" />
-                <p><button type="submit" class="btn btn-warning">Like</button></p>
-            </form>
-            <form action="/Interaction/Dislike">
-                <input type="hidden" name="id" value="@Model?.User?.Id" />
-                <p><button type="submit" class="btn btn-warning">Dislike</button></p>
-            </form>
+<div>
+    @if(Model is null)
+    {
+        <p class="border-gray" href="/">Wait a bit until someone sees your profile.</p>
+    }
+    else
+    {
+        @Html.Partial("Anket", @Model.Blank)
+
+        <br/>
+
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+                <form action="/Interaction/Like">
+                    <input type="hidden" name="id" value="@Model?.User?.Id" />
+                    <p><button type="submit" class="btn btn-warning">Like</button></p>
+                </form>
+                <form action="/Interaction/Dislike">
+                    <input type="hidden" name="id" value="@Model?.User?.Id" />
+                    <p><button type="submit" class="btn btn-warning">Dislike</button></p>
+                </form>
+            </div>
         </div>
-    </div>
-}
+    }
+</div>

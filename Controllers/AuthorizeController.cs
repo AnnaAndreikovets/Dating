@@ -38,7 +38,7 @@ namespace DatingSite.Controllers
 
             if (!form.ContainsKey("email") || !form.ContainsKey("password"))
             {
-                return RedirectToAction("LogIn"); //уведомить, что данные для входа не заданы
+                return RedirectToAction("LogIn");
             }
  
             string email = form["email"]!;
@@ -46,11 +46,15 @@ namespace DatingSite.Controllers
 
             User? user = people!.Users()?.FirstOrDefault(p => p.Email == email);
             
-            if (user is not null) return RedirectToAction("LogIn"); //уведомить, что такой пользователь уже существует
+            if (user is not null)
+            {
+                ViewData["information"] = "User already exists";
+                return View("LogIn");
+            }
 
             if (!form.ContainsKey("firstName") || !form.ContainsKey("secondName")  || !form.ContainsKey("age") || form.Files.GetFile("photo") is null || !form.ContainsKey("description") || !form.ContainsKey("sex") || !form.ContainsKey("preferSex"))
             {
-                return RedirectToAction("LogIn"); //уведомить, что данные не заданы
+                return RedirectToAction("LogIn");
             }
 
             string firstName = form["firstName"]!;
@@ -120,7 +124,7 @@ namespace DatingSite.Controllers
             
             if (!form.ContainsKey("email") || !form.ContainsKey("password"))
             {
-                return RedirectToAction("SignIn"); //уведомить, что данные незаданы
+                return RedirectToAction("SignIn");
             }
  
             string email = form["email"]!;
@@ -128,7 +132,11 @@ namespace DatingSite.Controllers
 
             User? user = people?.Users()?.FirstOrDefault(p => p.Email == email && p.Password == password);
             
-            if (user is null) return RedirectToAction("SignIn"); //уведомить, что неверные данные
+            if (user is null)
+            {
+                ViewData["information"] = "Wrong address and/or password";
+                return View("SignIn");
+            }
             
             people!.SetUser(user);
 

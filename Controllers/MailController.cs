@@ -25,7 +25,7 @@ namespace DatingSite.Controllers
             
             if(userChat is not null)
             {
-                IEnumerable<Blank>? blanks = people.Blanks().Where(p => userChat.Any(c => c.BlankId == p.Id));
+                IEnumerable<Blank>? blanks = people.Blanks()?.Where(p => userChat.Any(c => c.BlankId == p.Id));
             
                 if(blanks is not null)
                 {

@@ -1,24 +1,29 @@
 @model BlankViewModel
 
-@if(Model is null)
-{
-    <p class="border-gray" href="/">No users matching your criteria were found. Wait a bit for them to show up.</p>
-}
-else
-{
-    @Html.Partial("Anket", @Model.Blank)
-    <div class="card-body">
-        <div class="d-flex justify-content-between align-items-center">
-            <form action="/Ankets/Skip">
-                <input type="hidden" name="id" value="@Model?.User?.Id" />
-                <input type="hidden" name="like" value="true" />
-                <p><button type="submit" class="btn btn-warning">Like</button></p>
-            </form>
-            <form action="/Ankets/Skip">
-                <input type="hidden" name="id" value="@Model?.User?.Id" />
-                <input type="hidden" name="like" value="false" />
-                <p><button type="submit" class="btn btn-warning">Dislike</button></p>
-            </form>
+<div>
+    @if(Model is null)
+    {
+        <p class="border-gray" href="/">No users matching your criteria were found. Wait a bit for them to show up.</p>
+    }
+    else
+    {
+        @Html.Partial("Anket", @Model.Blank)
+
+        <br/>
+
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+                <form action="/Ankets/Skip">
+                    <input type="hidden" name="id" value="@Model?.User?.Id" />
+                    <input type="hidden" name="like" value="true" />
+                    <p><button type="submit" class="btn btn-warning">Like</button></p>
+                </form>
+                <form action="/Ankets/Skip">
+                    <input type="hidden" name="id" value="@Model?.User?.Id" />
+                    <input type="hidden" name="like" value="false" />
+                    <p><button type="submit" class="btn btn-warning">Dislike</button></p>
+                </form>
+            </div>
         </div>
-    </div>
-}
+    }
+</div>

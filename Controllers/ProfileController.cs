@@ -67,7 +67,7 @@ namespace DatingSite.Controllers
 
             if (!form.ContainsKey("firstName") || !form.ContainsKey("secondName")  || !form.ContainsKey("age") || !form.ContainsKey("description") || !form.ContainsKey("sex") || !form.ContainsKey("preferSex"))
             {
-                return RedirectToAction("LogIn"); //сказать, что некорректные данные
+                return RedirectToAction("LogIn");
             }
 
             string firstName = form["firstName"]!;
@@ -140,7 +140,7 @@ namespace DatingSite.Controllers
 
             if (!form.ContainsKey("password"))
             {
-                return RedirectToAction("LogIn"); //сказать, что некорректные данные
+                return RedirectToAction("LogIn");
             }
 
             user.Password = form["password"]!;

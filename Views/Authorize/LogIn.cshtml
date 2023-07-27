@@ -35,15 +35,24 @@
       <div>
         <input type="file" name="photo" accept="image/*" id="photo" required>
         <label for="photo" class="custom-file-upload">Choose your photo</label>
-        <span id="file-name">File not selected</span>
+        <span class="text-danger" id="file-name">File not selected</span>
 
         <script>
           const input = document.getElementById('photo');
           const fileNameSpan = document.getElementById('file-name');
 
           input.addEventListener('change', (e) => {
-          const file = e.target.files[0];
-          fileNameSpan.textContent = file ? file.name : 'File not selected';
+            const file = e.target.files[0];
+            fileNameSpan.textContent = file ? file.name : 'File not selected';
+
+            if (fileNameSpan.textContent === "File not selected")
+            {
+              fileNameSpan.classList.add("text-danger");
+            }
+            else
+            {
+              fileNameSpan.classList.remove("text-danger");
+            }
           });
         </script>
       </div>
@@ -85,8 +94,8 @@
           <input type="checkbox" value="remember-me"> Remember me
         </label>
       </div>
+      <h5 class="font-weight-normal text-danger">@ViewData["information"]</h5>
       </div>
-
       <button class="btn btn-lg btn-primary btn-block" type="submit">create an account</button>
     </form>
 </div>
