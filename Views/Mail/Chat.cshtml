@@ -13,9 +13,17 @@
 
 <div class="card mb-4 box-shadow col-md-8 order-md-1">
   <div class="media pt-3" style="display: flex; justify-content: space-between; align-items: center;">
-  <p style="margin: 0;"><a class="btn btn-warning" href="/Profile/Index/@Model.Chat.BlankId/@Model.Chat.AnketId">Profile</a></p>
+  <form action="/Profile/Index">
+    <input type="hidden" name="blankId" value="@Model.Chat.BlankId" />
+    <input type="hidden" name="userId" value="@Model.Chat.AnketId" />
+    <p style="margin: 0;"><button type="submit" class="btn btn-warning">Profile</button></p>
+  </form>
   <p style="margin: 0;">@Model.Blank.FirstName @Model.Blank.SecondName</p>
-  <p style="margin: 0;"><a class="btn btn-warning" href="/Mail/DeleteChat/@Model.Chat.BlankId/@Model.Chat.AnketId">Delete</a></p>
+  <form action="/Mail/DeleteChat">
+    <input type="hidden" name="blankId" value="@Model.Chat.BlankId" />
+    <input type="hidden" name="anketId" value="@Model.Chat.AnketId" />
+    <p style="margin: 0;"><button type="submit" class="btn btn-warning">Delete</button></p>
+  </form>
 </div>
   <hr/>
 <!-- CHAT BAR BLOCK -->
@@ -40,8 +48,9 @@
             <div class="chat-bar-icons">
                 <i id="chat-icon" style="color: #333;" class="fa fa-fw fa-send" onclick="sendButton()"></i>
             </div>-->
-            <form id="myForm" action="/Mail/Message/@Model.Blank.Id" method="POST">
+            <form id="myForm" action="/Mail/Message" method="POST">
             <div id="userInput">
+              <input type="hidden" name="id" value="@Model.Blank.Id">
               <input id="textInput" class="input-box" type="text" name="msg">
               <p></p>
             </div>

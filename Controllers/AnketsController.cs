@@ -42,8 +42,7 @@ namespace DatingSite.Controllers
             return View(anketViewModel);
         }
 
-        [Route("Ankets/Skip/{id}")]
-        [Route("Ankets/Skip/{id}/{like}")]
+        [Route("Ankets/Skip")]
         public IActionResult Skip(Guid id, bool like)
         {
             //выполрнить логику по выполнению данных только если все данные правильные

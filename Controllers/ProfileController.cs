@@ -15,10 +15,12 @@ namespace DatingSite.Controllers
             this.people = people;
         }
 
-        [Route("Profile/Index/{blankId}/{userId}")]
+        [Route("Profile/Index")]
         public IActionResult Index(Guid blankId, Guid userId)
         {
             Anket? anket = people.Anket(userId);
+            Console.WriteLine(blankId);
+            Console.WriteLine(userId);
 
             if(anket is not null && anket.Like)
             {

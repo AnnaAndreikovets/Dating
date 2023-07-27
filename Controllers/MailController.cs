@@ -40,7 +40,7 @@ namespace DatingSite.Controllers
             return View();
         }
 
-        [Route("Mail/Chat/{id}")]
+        [Route("Mail/Chat")]
         public IActionResult Chat(Guid id)
         {
             Blank? blank = people.Blank(id);
@@ -57,7 +57,7 @@ namespace DatingSite.Controllers
         }
     
         [HttpPost]
-        [Route("/Mail/Message/{id}")]
+        [Route("/Mail/Message")]
         public void Message(Guid id)
         {
             Chat? currentChat = chat.Chat(id);
@@ -95,7 +95,7 @@ namespace DatingSite.Controllers
             }
         }
         
-        [Route("Mail/DeleteChat/{blankId}/{anketId}")]
+        [Route("Mail/DeleteChat")]
         public IActionResult DeleteChat(Guid blankId, Guid anketId)
         {
             User? user = people.User();

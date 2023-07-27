@@ -66,7 +66,7 @@ namespace DatingSite.Controllers
             //вернуть vm
         }
 
-        [Route("Interaction/Dislike/{id}")]
+        [Route("Interaction/Dislike")]
         public IActionResult Dislike(Guid id)
         {
             var users = people?.Interested(people.User().Id)?.Users?.Remove(id);
@@ -74,7 +74,7 @@ namespace DatingSite.Controllers
             return RedirectToAction("Index");
         }
         
-        [Route("Interaction/Like/{id}")]
+        [Route("Interaction/Like")]
         public IActionResult Like(Guid id)
         {
             void LikeAndAddChat(Guid id1, Guid id2)
