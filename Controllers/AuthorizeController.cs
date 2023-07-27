@@ -36,21 +36,22 @@ namespace DatingSite.Controllers
         {
             var form = HttpContext.Request.Form;
 
-            if (!form.ContainsKey("email") || !form.ContainsKey("password")) return RedirectToAction("LogIn"); //уведомить, что данные для входа не заданы
+            if (!form.ContainsKey("email") || !form.ContainsKey("password"))
+            {
+                return RedirectToAction("LogIn"); //уведомить, что данные для входа не заданы
+            }
  
             string email = form["email"]!;
             string password = form["password"]!;
-            if(people is null)
-            {
-                throw new NullReferenceException();
-            }
 
             User? user = people!.Users()?.FirstOrDefault(p => p.Email == email);
             
             if (user is not null) return RedirectToAction("LogIn"); //уведомить, что такой пользователь уже существует
 
-            if (!form.ContainsKey("firstName") || !form.ContainsKey("secondName")  || !form.ContainsKey("age") || form.Files.GetFile("photo") is null || 
-            !form.ContainsKey("description") || !form.ContainsKey("sex") || !form.ContainsKey("preferSex")) return RedirectToAction("LogIn"); //уведомить, что данные не заданы
+            if (!form.ContainsKey("firstName") || !form.ContainsKey("secondName")  || !form.ContainsKey("age") || form.Files.GetFile("photo") is null || !form.ContainsKey("description") || !form.ContainsKey("sex") || !form.ContainsKey("preferSex"))
+            {
+                return RedirectToAction("LogIn"); //уведомить, что данные не заданы
+            }
 
             string firstName = form["firstName"]!;
             string secondName = form["secondName"]!;
@@ -61,15 +62,12 @@ namespace DatingSite.Controllers
             var photo = form.Files.GetFile("photo")!;
             
             var newFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(photo.FileName);
-            var directoryPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img");
-            string imagePath = Path.Combine(directoryPath, newFileName);
+            string imagePath = Path.Combine(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img"), newFileName);
 
             using (var stream = new FileStream(imagePath, FileMode.Create))
             {
                 photo.CopyTo(stream);
             }
-
-            //imagePath = Path.Combine("/images", newFileName);
 
             Blank blank = new Blank()
             {
@@ -120,7 +118,10 @@ namespace DatingSite.Controllers
         {
             var form = HttpContext.Request.Form;
             
-            if (!form.ContainsKey("email") || !form.ContainsKey("password")) return RedirectToAction("SignIn"); //уведомить, что данные незаданы
+            if (!form.ContainsKey("email") || !form.ContainsKey("password"))
+            {
+                return RedirectToAction("SignIn"); //уведомить, что данные незаданы
+            }
  
             string email = form["email"]!;
             string password = form["password"]!;

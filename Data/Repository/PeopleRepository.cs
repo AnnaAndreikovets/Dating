@@ -13,8 +13,7 @@ namespace DatingSite.Data.Repository
 
             if(attraction is not null)
             {
-                var result = Users()?.FirstOrDefault(u => 
-                    {
+                var result = Users()?.FirstOrDefault(u => {
                         Blank blank = Blank(u.BlankId)!;
                         Blank userBlank = Blank(user.BlankId)!;
 
@@ -35,86 +34,46 @@ namespace DatingSite.Data.Repository
             if(users?.Count() > 0)
             {
                 var id = users.First();
+                
                 return User(id);
             }
 
             return null;
         }
 
-        public Blank? Blank(Guid id)
-        {
-            return MockPeople.Blanks.FirstOrDefault(b => b.Id.CompareTo(id) == 0);
-        }
+        public Blank? Blank(Guid id) => MockPeople.Blanks.FirstOrDefault(b => b.Id.CompareTo(id) == 0);
 
-        public IEnumerable<Blank> Blanks()
-        {
-            return MockPeople.Blanks;
-        }
+        public IEnumerable<Blank> Blanks() => MockPeople.Blanks;
         
-        public Blank CurrentUser()
-        {
-            return Blank(MockPeople.User.BlankId)!;
-        }
+        public Blank CurrentUser() => Blank(MockPeople.User.BlankId)!;
 
-        public IEnumerable<User>? Users()
-        {
-            return MockPeople.Users;
-        }
+        public IEnumerable<User>? Users() => MockPeople.Users;
 
-        public Interested? Interested(Guid userId)
-        {
-            return MockPeople.Interesteds?.FirstOrDefault(i => i.UserId.CompareTo(userId) == 0);
-        }
+        public Interested? Interested(Guid userId) => MockPeople.Interesteds?.FirstOrDefault(i => i.UserId.CompareTo(userId) == 0);
 
-        public Interaction? Interaction(Guid userId)
-        {
-            return MockPeople.Interactions.FirstOrDefault(a => a.UserId.CompareTo(userId) == 0);
-        }
+        public Interaction? Interaction(Guid userId) => MockPeople.Interactions.FirstOrDefault(a => a.UserId.CompareTo(userId) == 0);
 
-        public User User()
-        {
-            return MockPeople.User;
-        }
+        public User User() => MockPeople.User;
     
-        public User? User(Guid id)
-        {
-            return Users()?.FirstOrDefault(u => u.Id.CompareTo(id) == 0);
-        }
+        public User? User(Guid id) => Users()?.FirstOrDefault(u => u.Id.CompareTo(id) == 0);
     
         public void AddUser(User user)
         {
             SetUser(user);
+
             MockPeople.Users.Add(user);
         }
 
-        public void SetUser(User user)
-        {
-            MockPeople.User = user;
-        }
+        public void SetUser(User user) => MockPeople.User = user;
 
-        public void AddInteractions(Interaction interaction)
-        {
-            MockPeople.Interactions.Add(interaction);
-        }
+        public void AddInteractions(Interaction interaction) => MockPeople.Interactions.Add(interaction);
         
-        public void AddInterested(Interested interested)
-        {
-            MockPeople.Interesteds.Add(interested);
-        }
+        public void AddInterested(Interested interested) => MockPeople.Interesteds.Add(interested);
         
-        public void AddBlank(Blank blank)
-        {
-            MockPeople.Blanks.Add(blank);
-        }
+        public void AddBlank(Blank blank) => MockPeople.Blanks.Add(blank);
 
-        public Anket? Anket(Guid id)
-        {
-            return Interaction(User().Id)?.UsersAnkets?.FirstOrDefault(a => a.Id.CompareTo(id) == 0);
-        }
+        public Anket? Anket(Guid id) => Interaction(User().Id)?.UsersAnkets?.FirstOrDefault(a => a.Id.CompareTo(id) == 0);
 
-        public Anket? Anket(Guid userId, Guid secondId)
-        {
-            return Interaction(userId)?.UsersAnkets?.FirstOrDefault(a => a.UserId == secondId);
-        }
+        public Anket? Anket(Guid userId, Guid secondId) => Interaction(userId)?.UsersAnkets?.FirstOrDefault(a => a.UserId == secondId);
     }
 }

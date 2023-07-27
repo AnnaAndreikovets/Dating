@@ -19,10 +19,13 @@ namespace DatingSite.Controllers
         public IActionResult Index(Guid blankId, Guid userId)
         {
             Anket? anket = people.Anket(userId);
-            Console.WriteLine(blankId);
-            Console.WriteLine(userId);
 
-            if(anket is not null && anket.Like)
+            if(anket is null)
+            {
+                throw new ArgumentNullException("Invalid user data!");
+            }
+
+            if(anket.Like)
             {
                 Blank? person = people.Blank(blankId);
 
@@ -32,7 +35,7 @@ namespace DatingSite.Controllers
                 }
             }
 
-            throw new Exception(); //bad request
+            return RedirectPermanent("/Home/Index");
         }
         
         [Route("Profile/User")]
@@ -41,6 +44,7 @@ namespace DatingSite.Controllers
             return View(people.CurrentUser());
         }
 
+        [Route("Profile/Settings")]
         public IActionResult Settings()
         {
             return View(people.CurrentUser());
@@ -52,15 +56,19 @@ namespace DatingSite.Controllers
         {
             var form = HttpContext.Request.Form;
 
-            if(people is null)
-            {
-                throw new NullReferenceException();
-            }
-
             User user = people.User();
 
-            if (!form.ContainsKey("firstName") || !form.ContainsKey("secondName")  || !form.ContainsKey("age") || 
-            !form.ContainsKey("description") || !form.ContainsKey("sex") || !form.ContainsKey("preferSex")) return RedirectToAction("LogIn"); //сказать, что некорректные данные
+            Blank? blank = people.Blank(user.BlankId);
+
+            if(blank is null)
+            {
+                throw new NullReferenceException("Invalid user data!");
+            }
+
+            if (!form.ContainsKey("firstName") || !form.ContainsKey("secondName")  || !form.ContainsKey("age") || !form.ContainsKey("description") || !form.ContainsKey("sex") || !form.ContainsKey("preferSex"))
+            {
+                return RedirectToAction("LogIn"); //сказать, что некорректные данные
+            }
 
             string firstName = form["firstName"]!;
             string secondName = form["secondName"]!;
@@ -68,20 +76,12 @@ namespace DatingSite.Controllers
             string sex = form["sex"]!;
             string preferSex = form["preferSex"]!;
             Byte.TryParse(form["age"], out byte age);
-            
-            Blank? blank = people.Blank(user.BlankId);
-
-            if(blank is null)
-            {
-                throw new NullReferenceException();
-            }
 
             if(form.Files.GetFile("photo") is not null)
             {
                 var photo = form.Files.GetFile("photo")!;
                 var newFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(photo.FileName);
-                var directoryPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img");
-                string imagePath = Path.Combine(directoryPath, newFileName);
+                string imagePath = Path.Combine(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img"), newFileName);
 
                 using (var stream = new FileStream(imagePath, FileMode.Create))
                 {
@@ -136,18 +136,14 @@ namespace DatingSite.Controllers
         {
             var form = HttpContext.Request.Form;
 
-            if(people is null)
-            {
-                throw new NullReferenceException();
-            }
-
             User user = people.User();
 
-            if (!form.ContainsKey("password")) return RedirectToAction("LogIn"); //сказать, что некорректные данные
+            if (!form.ContainsKey("password"))
+            {
+                return RedirectToAction("LogIn"); //сказать, что некорректные данные
+            }
 
-            string password = form["password"]!;
-            
-            user.Password = password;
+            user.Password = form["password"]!;
 
             return RedirectToAction("User");
         }

@@ -1,4 +1,4 @@
-<div class="text-center" style="display: -ms-flexbox; display: -webkit-box; display: flex; -ms-flex-align: center; -ms-flex-pack: center; -webkit-box-align: center; align-items: center; -webkit-box-pack: center; justify-content: center; padding-top: 40px; padding-bottom: 40px;">
+<div class="text-center block-blank">
     <form class="form-login" action="/Authorize/LogInEnter" method="post" enctype="multipart/form-data">
       <h1 class="h3 mb-3 font-weight-normal">Please log in</h1>
       <label for="email" class="sr-only">Email address</label>
@@ -33,23 +33,6 @@
       <br/>
 
       <div>
-        <style>
-          .custom-file-upload {
-          display: inline-block;
-          cursor: pointer;
-          padding: 6px 12px;
-          font-size: 14px;
-          color: #fff;
-          background-color: #007aff;
-          border-color: #007aff;
-          border-radius: 4px;
-          }
-
-          input[type="file"] {
-            display: none;
-          }
-        </style>
-
         <input type="file" name="photo" accept="image/*" id="photo" required>
         <label for="photo" class="custom-file-upload">Choose your photo</label>
         <span id="file-name">File not selected</span>

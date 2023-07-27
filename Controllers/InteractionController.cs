@@ -42,34 +42,19 @@ namespace DatingSite.Controllers
             };
             
             return View(anketViewModel);
-            /*User? user = people.PersonForLooking();
-            
-            if(user is null)
-            {
-                return View(null);
-            }
-            
-            Blank? blank = people.Blank(user.BlankId);
-
-            if(blank is null)
-            {
-                return View(null);
-            }
-            
-            BlankViewModel anketViewModel = new BlankViewModel()
-            {
-                Blank = blank,
-                User = user
-            };
-            
-            return View(anketViewModel);*/
-            //вернуть vm
         }
 
         [Route("Interaction/Dislike")]
         public IActionResult Dislike(Guid id)
         {
-            var users = people?.Interested(people.User().Id)?.Users?.Remove(id);
+            var users = people?.Interested(people.User().Id)?.Users;
+
+            if(users is null)
+            {
+                throw new ArgumentNullException("Invalid user data!");
+            }
+
+            users.Remove(id);
             
             return RedirectToAction("Index");
         }
@@ -79,23 +64,16 @@ namespace DatingSite.Controllers
         {
             void LikeAndAddChat(Guid id1, Guid id2)
             {
-                //var anket = people.Interaction(id1)?.UsersAnkets?.FirstOrDefault(a => a.UserId == id2);
                 var anket = people.Anket(id1, id2);
-
-                if(anket is null)
-                {
-                    throw new Exception();
-                }
-
-                anket.Like = true;
-
                 User? user1 = people.User(id1);
                 User? user2 = people.User(id2);
 
-                if(user1 is null || user2 is null)
+                if(anket is null || user1 is null || user2 is null)
                 {
-                    throw new Exception();
+                    throw new ArgumentNullException("Invalid user id for user and/or anket!");
                 }
+
+                anket.Like = true;
 
                 Chats? chats = chat.Chats(id1);
 

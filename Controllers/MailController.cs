@@ -27,14 +27,17 @@ namespace DatingSite.Controllers
             {
                 IEnumerable<Blank>? blanks = people.Blanks().Where(p => userChat.Any(c => c.BlankId == p.Id));
             
-                List<Tuple<Chat, Blank>> result = blanks.Join(userChat, b => b.Id, c => c.BlankId, (c, b) => Tuple.Create(b, c)).ToList();
-
-                ChatsViewModel chatsViewModel = new ChatsViewModel()
+                if(blanks is not null)
                 {
-                    ChatsBlanks = result
-                };
+                    List<Tuple<Chat, Blank>> result = blanks.Join(userChat, b => b.Id, c => c.BlankId, (c, b) => Tuple.Create(b, c)).ToList();
 
-                return View(chatsViewModel);
+                    ChatsViewModel chatsViewModel = new ChatsViewModel()
+                    {
+                        ChatsBlanks = result
+                    };
+
+                    return View(chatsViewModel);
+                }
             }
 
             return View();
@@ -44,8 +47,18 @@ namespace DatingSite.Controllers
         public IActionResult Chat(Guid id)
         {
             Blank? blank = people.Blank(id);
+
+            if(blank is null)
+            {
+                throw new ArgumentNullException("Invalid user id for blank!");
+            }
             
             Chat? _chat = chat.Chat(blank.Id);
+
+            if(_chat is null)
+            {
+                throw new ArgumentNullException("Invalid user id for chat!");
+            }
 
             ChatViewModel chatViewModel = new ChatViewModel()
             {
@@ -62,35 +75,40 @@ namespace DatingSite.Controllers
         {
             Chat? currentChat = chat.Chat(id);
 
-            if(currentChat is not null)
+            if(currentChat is null)
             {
-                Blank user = people.CurrentUser();
-                string message = Request.Form["msg"].ToString().Trim();
+                throw new ArgumentNullException("Invalid id for chat!");
+            }
 
-                if(!string.IsNullOrEmpty(message))
+            Blank user = people.CurrentUser();
+            string message = Request.Form["msg"].ToString().Trim();
+
+            if(!string.IsNullOrEmpty(message))
+            {
+                Message _message = new Message()
                 {
-                    Message _message = new Message()
+                    Text = message,
+                    Time = DateTime.Now,
+                    //Sender = $"{user.FirstName} {user.SecondName}"
+                };
+
+                var messages = currentChat.Messages;
+                var messageId = _message.Id;
+
+                if(messages is null)
+                {
+                    messageId = 1;
+
+                    messages = new List<Message>()
                     {
-                        Text = message,
-                        Time = DateTime.Now,
-                        //Sender = $"{user.FirstName} {user.SecondName}"
+                        _message
                     };
-    
-                    if(currentChat.Messages is null)
-                    {
-                        _message.Id = 1;
+                }
+                else
+                {
+                    messageId = messages.Last().Id + 1;
 
-                        currentChat.Messages = new List<Message>()
-                        {
-                            _message
-                        };
-                    }
-                    else
-                    {
-                        _message.Id = currentChat.Messages.Last().Id + 1;
-
-                        currentChat.Messages.Add(_message);
-                    }
+                    messages.Add(_message);
                 }
             }
         }
@@ -99,12 +117,33 @@ namespace DatingSite.Controllers
         public IActionResult DeleteChat(Guid blankId, Guid anketId)
         {
             User? user = people.User();
+            
+            if(user is null)
+            {
+                throw new ArgumentNullException("Invalid id for user!");
+            }
 
             Blank? blank1 = people.Blank(user.BlankId);
             Blank? blank2 = people.Blank(blankId);
 
+            if(blank1 is null || blank2 is null)
+            {
+                throw new ArgumentNullException("Invalid id for blank!");
+            }
+
             Anket? anket2 = people.Anket(anketId);
+
+            if(anket2 is null)
+            {
+                throw new ArgumentNullException("Invalid id for anket!");
+            }
+
             Anket? anket1 = people.Anket(user.Id, anket2.UserId);
+
+            if(anket1 is null)
+            {
+                throw new ArgumentNullException("Invalid id for user's anket!");
+            }
 
             anket1.Like = false;
             anket2.Like = false;

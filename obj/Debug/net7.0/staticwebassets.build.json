@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "SoPxiXrT1QcyNoi52gEN0eAlAmJvG/VabSdiMMqd3xc=",
+  "Hash": "ltQQx4sTIqkqhZFjRNMqyyxPTqvSLvrrB8jUbrXk9ng=",
   "Source": "DatingSite",
   "BasePath": "_content/DatingSite",
   "Mode": "Default",
@@ -66,6 +66,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\style.css"
+    },
+    {
+      "Identity": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\css\\userData.css",
+      "SourceId": "DatingSite",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\",
+      "BasePath": "_content/DatingSite",
+      "RelativePath": "css/userData.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\userData.css"
     },
     {
       "Identity": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\img\\AlexandrMaksev.jpg",
@@ -270,6 +287,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\bootstrap.min.js"
+    },
+    {
+      "Identity": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\js\\chat.js",
+      "SourceId": "DatingSite",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\",
+      "BasePath": "_content/DatingSite",
+      "RelativePath": "js/chat.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\chat.js"
     },
     {
       "Identity": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\js\\responses.js",

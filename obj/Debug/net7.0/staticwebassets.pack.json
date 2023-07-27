@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\css\\style.css"
     },
     {
+      "Id": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\css\\userData.css",
+      "PackagePath": "staticwebassets\\css\\userData.css"
+    },
+    {
       "Id": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\img\\AlexandrMaksev.jpg",
       "PackagePath": "staticwebassets\\img\\AlexandrMaksev.jpg"
     },
@@ -59,6 +63,10 @@
     {
       "Id": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\js\\bootstrap.min.js",
       "PackagePath": "staticwebassets\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\js\\chat.js",
+      "PackagePath": "staticwebassets\\js\\chat.js"
     },
     {
       "Id": "C:\\Ann\\Scripts\\DatingSite\\wwwroot\\js\\responses.js",

@@ -7,8 +7,8 @@ namespace DatingSite.Data.Models
         [BindRequired]
         public Guid Id { get; set; }
         [BindRequired]
-        //public Guid UserId { get; set; } //с кем чат
         public Guid BlankId { get; set; }
+        [BindRequired]
         public Guid AnketId { get; set; }
         public List<Message>? Messages { get; set; }
     }

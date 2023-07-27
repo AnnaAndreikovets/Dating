@@ -45,53 +45,45 @@ namespace DatingSite.Controllers
         [Route("Ankets/Skip")]
         public IActionResult Skip(Guid id, bool like)
         {
-            //выполрнить логику по выполнению данных только если все данные правильные
             Guid userId = people.User().Id;
-            
             Interaction? attractionUser = people.Interaction(userId);
             Interaction? attractionUser2 = people.Interaction(id);
+            Interested? interested = people.Interested(id);
 
-            if(attractionUser is null || attractionUser2 is null)
+            if(attractionUser is null || attractionUser2 is null || interested is null)
             {
-                throw new ArgumentException();
+                throw new ArgumentNullException("Invalid user id for interaction and/or interested!");
             }
 
-            if(attractionUser.UsersAnkets is null)
+            void AddAnket(Guid id, Interaction interaction)
             {
-                attractionUser.UsersAnkets = new List<Anket>();
+                var ankets = interaction.UsersAnkets;
+
+                if(ankets is null)
+                {
+                    ankets = new List<Anket>();
+                }
+
+                ankets.Add(new Anket()
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = id,
+                });
             }
 
-            if(attractionUser2.UsersAnkets is null)
-            {
-                attractionUser2.UsersAnkets = new List<Anket>();
-            }
-
-            attractionUser.UsersAnkets.Add(new Anket()
-            {
-                Id = Guid.NewGuid(),
-                UserId = id,
-            });
-            attractionUser2.UsersAnkets.Add(new Anket()
-            {
-                Id = Guid.NewGuid(),
-                UserId = userId,
-            });
+            AddAnket(id, attractionUser);
+            AddAnket(userId, attractionUser2);
 
             if(like)
             {
-                Interested? interested = people.Interested(id);
+                var users = interested.Users;
 
-                if(interested is null)
+                if(users is null)
                 {
-                    throw new ArgumentException();
-                }
-
-                if(interested.Users is null)
-                {
-                    interested.Users = new List<Guid>();
+                    users = new List<Guid>();
                 }
                 
-                interested.Users.Add(userId);
+                users.Add(userId);
             }
 
             return RedirectToAction("Index");
