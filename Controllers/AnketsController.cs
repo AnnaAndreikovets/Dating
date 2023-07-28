@@ -18,20 +18,17 @@ namespace DatingSite.Controllers
 
         public IActionResult Index()
         {
-Console.WriteLine("-----------------------");
             User? user = people.PersonForLooking();
             
             if(user is null)
             {
-Console.WriteLine("null1");
                 return View(null);
             }
             
             Blank? blank = people.Blank(user.BlankId);
-Console.WriteLine("1");
+
             if(blank is null)
             {
-Console.WriteLine("null2");
                 return View(null);
             }
             
@@ -40,7 +37,7 @@ Console.WriteLine("null2");
                 Blank = blank,
                 User = user
             };
-Console.WriteLine("2 --------------------------");
+
             return View(anketViewModel);
         }
 
@@ -55,7 +52,7 @@ Console.WriteLine("2 --------------------------");
             {
                 throw new ArgumentNullException("Invalid user id for interaction and/or interested!");
             }
-Console.WriteLine("start");
+
             void AddAnket(Guid id, Interaction interaction)
             {
                 var ankets = interaction.UsersAnkets;
@@ -64,7 +61,7 @@ Console.WriteLine("start");
                 {
                     ankets = new List<Anket>();
                 }
-                
+
                 ankets.Add(new Anket()
                 {
                     Id = Guid.NewGuid(),
