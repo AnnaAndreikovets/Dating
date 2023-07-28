@@ -6,7 +6,7 @@ using DatingSite.ViewModels;
 
 namespace DatingSite.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class AnketsController : Controller
     {
         readonly IPeople people;
@@ -16,20 +16,22 @@ namespace DatingSite.Controllers
             this.people = blank;
         }
 
-        [Route("Ankets/List")]
         public IActionResult Index()
         {
+Console.WriteLine("-----------------------");
             User? user = people.PersonForLooking();
             
             if(user is null)
             {
+Console.WriteLine("null1");
                 return View(null);
             }
             
             Blank? blank = people.Blank(user.BlankId);
-
+Console.WriteLine("1");
             if(blank is null)
             {
+Console.WriteLine("null2");
                 return View(null);
             }
             
@@ -38,11 +40,10 @@ namespace DatingSite.Controllers
                 Blank = blank,
                 User = user
             };
-            
+Console.WriteLine("2 --------------------------");
             return View(anketViewModel);
         }
 
-        [Route("Ankets/Skip")]
         public IActionResult Skip(Guid id, bool like)
         {
             Guid userId = people.User().Id;
@@ -54,7 +55,7 @@ namespace DatingSite.Controllers
             {
                 throw new ArgumentNullException("Invalid user id for interaction and/or interested!");
             }
-
+Console.WriteLine("start");
             void AddAnket(Guid id, Interaction interaction)
             {
                 var ankets = interaction.UsersAnkets;
@@ -63,7 +64,7 @@ namespace DatingSite.Controllers
                 {
                     ankets = new List<Anket>();
                 }
-
+                
                 ankets.Add(new Anket()
                 {
                     Id = Guid.NewGuid(),

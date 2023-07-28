@@ -146,7 +146,7 @@ namespace DatingSite.Data.Mocks
                 Id = Guid.NewGuid(),
                 BlankId = Blanks[0].Id,
                 Email = "AlexandrMaksev@gmail.com",
-                Password = "jytfvyff23ASD"
+                Password = "123"
             },
             new User()
             {
@@ -209,7 +209,7 @@ namespace DatingSite.Data.Mocks
                 Id = Guid.NewGuid(),
                 BlankId = Blanks[9].Id,
                 Email = "IrinaNugeva@gmail.com",
-                Password = "gfrioASDiu34"
+                Password = "123"
             },
             //удалить
             User

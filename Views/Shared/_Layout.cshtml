@@ -21,8 +21,8 @@
             <li class="nav-item active">
               <a class="nav-link" href="/">Main</a>
             </li>
-            <!--if(User.Identity!.IsAuthenticated)
-            {-->
+            @if(User.Identity!.IsAuthenticated)
+            {
               <li class="nav-item">
                 <a class="nav-link disabled" href="/Mail/List">Messages</a>
               </li>
@@ -30,7 +30,7 @@
                 <a class="nav-link disabled" href="/Profile/User">Profile</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link disabled" href="/Ankets/List">People</a>
+                <a class="nav-link disabled" href="/Ankets/Index">People</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link disabled" href="/Interaction/Index">Interaction</a>
@@ -38,16 +38,16 @@
               <li class="nav-item">
                 <a class="nav-link disabled" href="/Authorize/LogOut/">Log out</a>
               </li>
-            <!--}
+            }
             else
-            { -->
+            {
               <li class="nav-item">
                 <a class="nav-link disabled" href="/Authorize/SignIn/">Sign in</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link disabled" href="/Authorize/LogIn/">Log in</a>
               </li>
-            <!--}-->
+            }
           </ul>
         </div>
       </nav>

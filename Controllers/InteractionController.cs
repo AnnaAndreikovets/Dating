@@ -6,7 +6,7 @@ using DatingSite.ViewModels;
 
 namespace DatingSite.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class InteractionController : Controller
     {
         readonly IPeople people;
@@ -18,7 +18,6 @@ namespace DatingSite.Controllers
             this.chat = chat;
         }
 
-        [Route("Interaction/Index")]
         public IActionResult Index()
         {
             User? user = people.PersonForWatching();
@@ -44,7 +43,6 @@ namespace DatingSite.Controllers
             return View(anketViewModel);
         }
 
-        [Route("Interaction/Dislike")]
         public IActionResult Dislike(Guid id)
         {
             var users = people?.Interested(people.User().Id)?.Users;
@@ -59,7 +57,6 @@ namespace DatingSite.Controllers
             return RedirectToAction("Index");
         }
         
-        [Route("Interaction/Like")]
         public IActionResult Like(Guid id)
         {
             void LikeAndAddChat(Guid id1, Guid id2)

@@ -17,21 +17,18 @@ namespace DatingSite.Controllers
         }
 
         [HttpGet]
-        [Route("Authorize/LogIn")]
         public IActionResult LogIn()
         {
             return View();
         }
         
         [HttpGet]
-        [Route("Authorize/SignIn")]
         public IActionResult SignIn()
         {
             return View();
         }
 
         [HttpPost]
-        [Route("Authorize/LogInEnter")]
         public async Task<IActionResult> LogInEnter()
         {
             var form = HttpContext.Request.Form;
@@ -117,7 +114,6 @@ namespace DatingSite.Controllers
         }
 
         [HttpPost]
-        [Route("Authorize/SignInEnter")]
         public async Task<IActionResult> SignInEnter()
         {
             var form = HttpContext.Request.Form;
@@ -149,15 +145,14 @@ namespace DatingSite.Controllers
             return RedirectPermanent("/Home/Index");
         }
 
-        [Route("Authorize/LogOut")]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> LogOut()
         {
             people.SetUser(new User());
 
             await HttpContext.SignOutAsync("Cookies");
 
-            return View();
+            return Redirect("/Home/Index");
         }
     }
 }

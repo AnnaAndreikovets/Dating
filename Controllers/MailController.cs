@@ -6,7 +6,7 @@ using DatingSite.ViewModels;
 
 namespace DatingSite.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class MailController : Controller
     {
         readonly IChat chat;
@@ -18,7 +18,6 @@ namespace DatingSite.Controllers
             this.people = people;
         }
 
-        [Route("Mail/List")]
         public IActionResult List()
         {
             IEnumerable<Chat>? userChat = chat.Chats()?.OrderByDescending(c => c.Messages is not null ? c.Messages.Last().Time : DateTime.Now);
@@ -43,7 +42,6 @@ namespace DatingSite.Controllers
             return View();
         }
 
-        [Route("Mail/Chat")]
         public IActionResult Chat(Guid id)
         {
             Blank? blank = people.Blank(id);
@@ -70,7 +68,6 @@ namespace DatingSite.Controllers
         }
     
         [HttpPost]
-        [Route("/Mail/Message")]
         public void Message(Guid id)
         {
             Chat? currentChat = chat.Chat(id);
@@ -113,7 +110,6 @@ namespace DatingSite.Controllers
             }
         }
         
-        [Route("Mail/DeleteChat")]
         public IActionResult DeleteChat(Guid blankId, Guid anketId)
         {
             User? user = people.User();

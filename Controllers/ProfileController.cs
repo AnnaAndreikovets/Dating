@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace DatingSite.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class ProfileController : Controller
     {
         readonly IPeople people;
@@ -15,7 +15,6 @@ namespace DatingSite.Controllers
             this.people = people;
         }
 
-        [Route("Profile/Index")]
         public IActionResult Index(Guid blankId, Guid userId)
         {
             Anket? anket = people.Anket(userId);
@@ -38,20 +37,17 @@ namespace DatingSite.Controllers
             return RedirectPermanent("/Home/Index");
         }
         
-        [Route("Profile/User")]
         new public IActionResult User()
         {
             return View(people.CurrentUser());
         }
 
-        [Route("Profile/Settings")]
         public IActionResult Settings()
         {
             return View(people.CurrentUser());
         }
 
         [HttpPost]
-        [Route("Profile/Change")]
         public IActionResult Change()
         {
             var form = HttpContext.Request.Form;
@@ -124,14 +120,12 @@ namespace DatingSite.Controllers
             return RedirectToAction("User");
         }
 
-        [Route("Profile/Password")]
         public IActionResult Password()
         {
             return View();
         }
 
         [HttpPost]
-        [Route("Profile/ChangePassword")]
         public IActionResult ChangePassword()
         {
             var form = HttpContext.Request.Form;

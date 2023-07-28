@@ -8,12 +8,12 @@ builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
 builder.Services.AddTransient<IPeople, PeopleRepository>();
 builder.Services.AddTransient<IChat, ChatRepository>();
 
-/*builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie("Cookies", options => {
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie("Cookies", options => {
     options.LoginPath = "/Authorize/LogIn";
     //options.AccessDeniedPath = "/Authorize/LogIn";
     options.LogoutPath = "/Authorize/LogOut";
 });
-builder.Services.AddAuthorization();*/
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
@@ -23,8 +23,8 @@ app.UseExceptionHandler("/Error");
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-/*app.UseAuthentication();
-app.UseAuthorization();*/
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseRouting();
 
