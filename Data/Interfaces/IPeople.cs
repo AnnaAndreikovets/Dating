@@ -19,6 +19,8 @@ namespace DatingSite.Data.Interfaces
         public void AddInteractions(Interaction interaction);
         public void AddInterested(Interested interested);
         public void AddBlank(Blank blank);
+        public void AddAnket(Interaction interaction, Guid id);
+        public void AddInterested(Interested interested, Guid id, Guid userId);
         public Anket? Anket(Guid id);
         public Anket? Anket(Guid userId, Guid secondId);
     }

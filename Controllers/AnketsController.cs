@@ -44,44 +44,21 @@ namespace DatingSite.Controllers
         public IActionResult Skip(Guid id, bool like)
         {
             Guid userId = people.User().Id;
-            Interaction? attractionUser = people.Interaction(userId);
-            Interaction? attractionUser2 = people.Interaction(id);
+            Interaction? interactionUser = people.Interaction(userId);
+            Interaction? interactionUser2 = people.Interaction(id);
             Interested? interested = people.Interested(id);
 
-            if(attractionUser is null || attractionUser2 is null || interested is null)
+            if(interactionUser is null || interactionUser2 is null || interested is null)
             {
                 throw new ArgumentNullException("Invalid user id for interaction and/or interested!");
             }
 
-            void AddAnket(Guid id, Interaction interaction)
-            {
-                var ankets = interaction.UsersAnkets;
-
-                if(ankets is null)
-                {
-                    ankets = new List<Anket>();
-                }
-
-                ankets.Add(new Anket()
-                {
-                    Id = Guid.NewGuid(),
-                    UserId = id,
-                });
-            }
-
-            AddAnket(id, attractionUser);
-            AddAnket(userId, attractionUser2);
+            people.AddAnket(interactionUser, id);
+            people.AddAnket(interactionUser2, userId);
 
             if(like)
             {
-                var users = interested.Users;
-
-                if(users is null)
-                {
-                    users = new List<Guid>();
-                }
-                
-                users.Add(userId);
+                people.AddInterested(interested, id, userId);
             }
 
             return RedirectToAction("Index");

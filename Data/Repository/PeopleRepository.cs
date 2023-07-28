@@ -81,6 +81,33 @@ namespace DatingSite.Data.Repository
         public void AddInterested(Interested interested) => MockPeople.Interesteds.Add(interested);
         
         public void AddBlank(Blank blank) => MockPeople.Blanks.Add(blank);
+        
+        public void AddAnket(Interaction interaction, Guid id)
+        {
+            if(interaction.UsersAnkets is null)
+            {
+                interaction.UsersAnkets = new List<Anket>();
+            }
+
+            Anket anket = new Anket()
+            {
+                Id = Guid.NewGuid(),
+                UserId = id
+            };
+
+            interaction.UsersAnkets.Add(anket);
+
+        }
+
+        public void AddInterested(Interested interested, Guid id, Guid userId)
+        {
+            if(interested.Users is null)
+            {
+                interested.Users = new List<Guid>();
+            }
+                
+            interested.Users.Add(userId);
+        }
 
         public Anket? Anket(Guid id) => Interaction(User().Id)?.UsersAnkets?.FirstOrDefault(a => a.Id.CompareTo(id) == 0);
 

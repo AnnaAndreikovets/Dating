@@ -4,14 +4,6 @@ namespace DatingSite.Data.Mocks
 {
     static public class MockPeople
     {
-        static public User User = new User()
-        {
-            Id = Guid.NewGuid(),
-            BlankId = Guid.NewGuid(),
-            Email = "ann.andreikovets@gmail.com",
-            Password = "123"
-        };
-
         static List<Blank> blanks = new List<Blank>()
         {
             new Blank()
@@ -124,10 +116,9 @@ namespace DatingSite.Data.Mocks
                 Sex = "female",
                 PreferSex = "male"
             },
-            //удалить
             new Blank()
             {
-                Id = User.BlankId,
+                Id = Guid.NewGuid(),
                 FirstName = "Anna",
                 SecondName = "Andreikovets",
                 Age = 18,
@@ -211,8 +202,13 @@ namespace DatingSite.Data.Mocks
                 Email = "IrinaNugeva@gmail.com",
                 Password = "123"
             },
-            //удалить
-            User
+            new User()
+            {
+                Id = Guid.NewGuid(),
+                BlankId = Blanks[10].Id,
+                Email = "ann.andreikovets@gmail.com",
+                Password = "123"
+            }
         };
     
         static public List<User> Users { get { return users; } set { users.AddRange(value); } }
@@ -232,7 +228,7 @@ namespace DatingSite.Data.Mocks
                     new Anket()
                     {
                         Id = Guid.NewGuid(),
-                        UserId = User.Id
+                        UserId = users[10].Id
                     }
                 }
             },
@@ -276,11 +272,10 @@ namespace DatingSite.Data.Mocks
                 Id = Guid.NewGuid(),
                 UserId = users[9].Id
             },
-            //удалить
             new Interaction()
             {
                 Id = Guid.NewGuid(),
-                UserId = User.Id,
+                UserId = users[10].Id,
                 UsersAnkets = new List<Anket>()
                 {
                     new Anket()
@@ -345,11 +340,10 @@ namespace DatingSite.Data.Mocks
                 Id = Guid.NewGuid(),
                 UserId = Users[9].Id
             },
-            //удалить
             new Interested()
             {
                 Id = Guid.NewGuid(),
-                UserId = User.Id,
+                UserId = Users[10].Id,
                 Users = new List<Guid>()
                 {
                     users[1].Id
@@ -357,5 +351,6 @@ namespace DatingSite.Data.Mocks
             },
         };
         static public List<Interested> Interesteds { get { return interesteds; } set { interesteds.AddRange(value); } }
+        static public User User = Users[10];
     }
 }
