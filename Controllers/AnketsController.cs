@@ -41,7 +41,7 @@ namespace DatingSite.Controllers
             return View(anketViewModel);
         }
 
-        public IActionResult Skip(Guid id, bool like)
+        public async Task<IActionResult> Skip(Guid id, bool like)
         {
             Guid userId = people.User().Id;
             Interaction? interactionUser = people.Interaction(userId);
@@ -53,12 +53,12 @@ namespace DatingSite.Controllers
                 throw new ArgumentNullException("Invalid user id for interaction and/or interested!");
             }
 
-            people.AddAnket(interactionUser, id);
-            people.AddAnket(interactionUser2, userId);
+            await people.AddAnket(interactionUser, id);
+            await people.AddAnket(interactionUser2, userId);
 
             if(like)
             {
-                people.AddInterested(interested, id, userId);
+                await people.AddInterested(interested, id, userId);
             }
 
             return RedirectToAction("Index");

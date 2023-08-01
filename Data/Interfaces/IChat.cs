@@ -7,8 +7,7 @@ namespace DatingSite.Data.Interfaces
         public Chat? Chat(Guid? id);
         public Chats? Chats(Guid id);
         public List<Chat>? Chats();
-        public void AddChats(Chats chats);
-        public void AddListChats(List<Chat> chats, Guid userId);
-        public void DeleteChat(Guid userId, Guid blankId);
+        public Task DeleteChat(Guid userId, Guid blankId);
+        public Task AddChatAndLike(Guid id1, Guid id2);
     }
 }
