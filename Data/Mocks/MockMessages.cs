@@ -2,11 +2,11 @@ using DatingSite.Data.Models;
 
 namespace DatingSite.Data.Mocks
 {
-    public static class MockMessages
+    /*public static class MockMessages
     {
         static List<Chats> chats = new List<Chats>()
         {
-            /*new Chats()
+            new Chats()
             {
                 Id = Guid.NewGuid(),
                 UserId = MockPeople.User.Id,
@@ -28,9 +28,9 @@ namespace DatingSite.Data.Mocks
                         }
                     }
                 }
-            }*/
+            }
         };
         
         static public List<Chats> Chats { get { return chats; } set { chats.AddRange(value); } }
-    }
+    }*/
 }

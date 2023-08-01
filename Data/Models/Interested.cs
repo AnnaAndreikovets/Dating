@@ -6,8 +6,9 @@ namespace DatingSite.Data.Models
     {
         [BindRequired]
         public Guid Id { get; set; }
+        
         [BindRequired]
         public Guid UserId { get; set; }
-        public List<Guid>? Users { get; set; }
+        public List<InterestedUser>? Users { get; set; }
     }
 }

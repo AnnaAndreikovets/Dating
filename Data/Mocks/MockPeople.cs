@@ -4,7 +4,7 @@ namespace DatingSite.Data.Mocks
 {
     static public class MockPeople
     {
-        static List<Blank> blanks = new List<Blank>()
+        /*static List<Blank> blanks = new List<Blank>()
         {
             new Blank()
             {
@@ -351,6 +351,6 @@ namespace DatingSite.Data.Mocks
             },
         };
         static public List<Interested> Interesteds { get { return interesteds; } set { interesteds.AddRange(value); } }
-        static public User User = Users[10];
+        static public User User = Users[10];*/
     }
 }

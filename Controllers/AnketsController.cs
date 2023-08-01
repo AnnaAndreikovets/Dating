@@ -47,7 +47,7 @@ namespace DatingSite.Controllers
             Interaction? interactionUser = people.Interaction(userId);
             Interaction? interactionUser2 = people.Interaction(id);
             Interested? interested = people.Interested(id);
-
+            
             if(interactionUser is null || interactionUser2 is null || interested is null)
             {
                 throw new ArgumentNullException("Invalid user id for interaction and/or interested!");

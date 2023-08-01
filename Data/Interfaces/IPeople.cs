@@ -14,14 +14,17 @@ namespace DatingSite.Data.Interfaces
         public Interaction? Interaction(Guid userId);
         public User User();
         public User? User(Guid id);
-        public void AddUser(User user);
+        public User? User(string email);
+        public User? User(string email, string password);
+        public Task AddUser(User user);
         public void SetUser(User user);
-        public void AddInteractions(Interaction interaction);
-        public void AddInterested(Interested interested);
-        public void AddBlank(Blank blank);
-        public void AddAnket(Interaction interaction, Guid id);
-        public void AddInterested(Interested interested, Guid id, Guid userId);
+        public Task AddInteractions(Interaction interaction);
+        public Task AddInterested(Interested interested);
+        public Task AddBlank(Blank blank);
+        public Task AddAnket(Interaction interaction, Guid id);
+        public Task AddInterested(Interested interested, Guid id, Guid userId);
         public Anket? Anket(Guid id);
         public Anket? Anket(Guid userId, Guid secondId);
+        public Task RemoveInterestedUser(Guid id);
     }
 }

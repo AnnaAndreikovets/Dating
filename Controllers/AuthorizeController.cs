@@ -41,7 +41,7 @@ namespace DatingSite.Controllers
             string email = form["email"]!;
             string password = form["password"]!;
 
-            User? user = people!.Users()?.FirstOrDefault(p => p.Email == email);
+            User? user = people!.User(email);
             
             if (user is not null)
             {
@@ -99,10 +99,10 @@ namespace DatingSite.Controllers
                 UserId = user.Id
             };
             
-            people.AddInterested(interested);
-            people.AddInteractions(interaction);
-            people.AddBlank(blank);
-            people.AddUser(user);
+            await people.AddInterested(interested);
+            await people.AddInteractions(interaction);
+            await people.AddBlank(blank);
+            await people.AddUser(user);
 
             var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Email) };
             
@@ -126,7 +126,7 @@ namespace DatingSite.Controllers
             string email = form["email"]!;
             string password = form["password"]!;
 
-            User? user = people?.Users()?.FirstOrDefault(p => p.Email == email && p.Password == password);
+            User? user = people.User(email, password);
             
             if (user is null)
             {

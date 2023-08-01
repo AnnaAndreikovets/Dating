@@ -1,6 +1,7 @@
+using DatingSite.Data;
+using DatingSite.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using DatingSite.Data.Interfaces;
-using DatingSite.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 
 namespace DatingSite.Controllers
@@ -9,10 +10,12 @@ namespace DatingSite.Controllers
     public class ProfileController : Controller
     {
         readonly IPeople people;
+        public ApplicationDBContext context { get; set; }
 
-        public ProfileController(IPeople people)
+        public ProfileController(IPeople people, ApplicationDBContext context)
         {
             this.people = people;
+            this.context = context;
         }
 
         public IActionResult Index(Guid blankId, Guid userId)
@@ -48,7 +51,7 @@ namespace DatingSite.Controllers
         }
 
         [HttpPost]
-        public IActionResult Change()
+        public async Task<IActionResult> Change()
         {
             var form = HttpContext.Request.Form;
 
@@ -117,6 +120,8 @@ namespace DatingSite.Controllers
                 blank.PreferSex = preferSex;
             }
 
+            await context.SaveChangesAsync();
+
             return RedirectToAction("User");
         }
 
@@ -126,18 +131,20 @@ namespace DatingSite.Controllers
         }
 
         [HttpPost]
-        public IActionResult ChangePassword()
+        public async Task<IActionResult> ChangePassword()
         {
             var form = HttpContext.Request.Form;
 
-            User user = people.User();
+            User user = people.User(people.User().Id)!;
 
             if (!form.ContainsKey("password"))
             {
                 return RedirectToAction("LogIn");
             }
-
+            
             user.Password = form["password"]!;
+
+            await context.SaveChangesAsync();
 
             return RedirectToAction("User");
         }

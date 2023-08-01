@@ -21,7 +21,7 @@ namespace DatingSite.Controllers
         public IActionResult Index()
         {
             User? user = people.PersonForWatching();
-            
+         
             if(user is null)
             {
                 return View(null);
@@ -45,14 +45,7 @@ namespace DatingSite.Controllers
 
         public IActionResult Dislike(Guid id)
         {
-            var users = people?.Interested(people.User().Id)?.Users;
-
-            if(users is null)
-            {
-                throw new ArgumentNullException("Invalid user data!");
-            }
-
-            users.Remove(id);
+            people.RemoveInterestedUser(id);
             
             return RedirectToAction("Index");
         }

@@ -1,8 +1,12 @@
+using DatingSite.Data;
 using DatingSite.Data.Interfaces;
 using DatingSite.Data.Repository;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<ApplicationDBContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
 builder.Services.AddTransient<IPeople, PeopleRepository>();
@@ -27,6 +31,13 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseRouting();
+
+using(var scope = app.Services.CreateScope())
+{
+    ApplicationDBContext content = scope.ServiceProvider.GetRequiredService<ApplicationDBContext>()!;
+
+    DBobjects.Initial(content);
+}
 
 //app.UseStatusCodePagesWithReExecute("/Home/Index", "?code={0}");
 
