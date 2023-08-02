@@ -1,8 +1,8 @@
-using Microsoft.AspNetCore.Authorization;
-using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using DatingSite.Data.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using DatingSite.Data.Models;
 
 namespace DatingSite.Controllers
@@ -59,6 +59,7 @@ namespace DatingSite.Controllers
             string description = form["description"]!;
             string sex = form["sex"]!;
             string preferSex = form["preferSex"]!;
+            string? rememberMe = form["rememberMe"];
             Byte.TryParse(form["age"], out byte age);
             var photo = form.Files.GetFile("photo")!;
             
@@ -104,13 +105,9 @@ namespace DatingSite.Controllers
             await people.AddBlank(blank);
             await people.AddUser(user);
 
-            var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Email) };
-            
-            ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Cookies");
+            AddRemeberMe(rememberMe, password, email);
 
-            await HttpContext.SignInAsync("Cookies", new ClaimsPrincipal(claimsIdentity));
-
-            return RedirectPermanent("/Home/Index");
+            return await AddCookies(user.Email);
         }
 
         [HttpPost]
@@ -136,7 +133,16 @@ namespace DatingSite.Controllers
             
             people!.SetUser(user);
 
-            var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Email) };
+            string? rememberMe = form["rememberMe"];
+
+            AddRemeberMe(rememberMe, password, email);
+
+            return await AddCookies(user.Email);
+        }
+
+        async Task<IActionResult> AddCookies(string email)
+        {
+            var claims = new List<Claim> { new Claim(ClaimTypes.Name, email) };
             
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Cookies");
 
@@ -150,9 +156,21 @@ namespace DatingSite.Controllers
         {
             people.SetUser(new User());
 
+            Response.Cookies.Delete("password");
+            Response.Cookies.Delete("email");
+
             await HttpContext.SignOutAsync("Cookies");
 
             return Redirect("/Home/Index");
+        }
+    
+        void AddRemeberMe(string? rememberMe, string password, string email)
+        {
+            if(rememberMe is not null)
+            {
+                Response.Cookies.Append("password", password);
+                Response.Cookies.Append("email", email);
+            }
         }
     }
 }

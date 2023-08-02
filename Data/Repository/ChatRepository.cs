@@ -6,8 +6,8 @@ namespace DatingSite.Data.Repository
 {
     public class ChatRepository : IChat
     {
-        public ApplicationDBContext context { get; set; }
-        public IPeople people { get; set; }
+        readonly ApplicationDBContext context;
+        readonly IPeople people;
 
         public ChatRepository(ApplicationDBContext context, IPeople people)
         {

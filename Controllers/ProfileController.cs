@@ -10,7 +10,7 @@ namespace DatingSite.Controllers
     public class ProfileController : Controller
     {
         readonly IPeople people;
-        public ApplicationDBContext context { get; set; }
+        readonly ApplicationDBContext context;
 
         public ProfileController(IPeople people, ApplicationDBContext context)
         {

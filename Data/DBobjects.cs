@@ -355,11 +355,6 @@ namespace DatingSite.Data
 
         public static void Initial(ApplicationDBContext context)
         {
-            /*if(!context.Chats.Any())
-            {
-                context.Chats.AddRange(new List<Chats>{});
-            }*/
-
             if(!context.Blanks.Any())
             {
                 context.Blanks.AddRange(blanks);

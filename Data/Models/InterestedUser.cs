@@ -6,6 +6,7 @@ namespace DatingSite.Data.Models
     {
         [BindRequired]
         public Guid Id { get; set; }
+        
         [BindRequired]
         public Guid UserId { get; set; }
     }

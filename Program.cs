@@ -1,8 +1,8 @@
-using DatingSite.Data;
-using DatingSite.Data.Interfaces;
-using DatingSite.Data.Repository;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using DatingSite.Data.Interfaces;
+using DatingSite.Data.Repository;
+using DatingSite.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,18 +11,23 @@ builder.Services.AddDbContext<ApplicationDBContext>(options => options.UseSqlite
 builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
 builder.Services.AddTransient<IPeople, PeopleRepository>();
 builder.Services.AddTransient<IChat, ChatRepository>();
+builder.Services.AddMvc(options =>
+{
+    options.Filters.Add(typeof(AuthTokenFilter));
+});
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie("Cookies", options => {
     options.LoginPath = "/Authorize/LogIn";
-    //options.AccessDeniedPath = "/Authorize/LogIn";
+    options.AccessDeniedPath = "/";
     options.LogoutPath = "/Authorize/LogOut";
 });
 builder.Services.AddAuthorization();
 
+builder.Services.AddMemoryCache();
+
 var app = builder.Build();
 
-app.UseMvc();
-app.UseExceptionHandler("/Error");
+app.UseExceptionHandler("/");
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

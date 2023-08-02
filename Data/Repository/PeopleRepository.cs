@@ -6,7 +6,7 @@ namespace DatingSite.Data.Repository
 {
     public class PeopleRepository : IPeople
     {
-        public ApplicationDBContext context { get; set; }
+        readonly ApplicationDBContext context;
         
         public PeopleRepository(ApplicationDBContext context)
         {
@@ -171,7 +171,5 @@ namespace DatingSite.Data.Repository
 
             await context.SaveChangesAsync();
         }
-
-        //IEnumerable<Blank> AllBlanks() => context.Blanks;
     }
 }
